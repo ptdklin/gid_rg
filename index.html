@@ -103,12 +103,35 @@
         .nested-list {
             list-style-type: none;
             padding-left: 20px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .nested-list li:before {
             content: "–";
             color: #666;
+        }
+
+        /* Добавляем отступы для заголовков перед списками */
+        .subsection p + ul,
+        .highlight-box strong + ul {
+            margin-top: 15px;
+        }
+
+        .subsection-title + .highlight-box {
+            margin-top: 15px;
+        }
+
+        .subsection p + p {
+            margin-top: 15px;
+        }
+
+        ul + p {
+            margin-top: 15px;
+        }
+
+        /* Отступы для вложенных списков внутри li */
+        li > .nested-list {
+            margin-top: 10px;
         }
 
         .highlight-box {
@@ -355,8 +378,8 @@
 
         .image-hotspot {
             position: absolute;
-            width: 120px;
-            height: 120px;
+            width: 168px; /* Увеличено на 40% (было 120px) */
+            height: 168px; /* Увеличено на 40% (было 120px) */
             border: 3px solid #ff6b6b;
             border-radius: 50%;
             animation: pulse 2s infinite;
@@ -766,7 +789,7 @@
                 <img src="image8.png" alt="Флюорография пациента А" onclick="showHotspot(this)">
                 <div class="click-hint">Попробуйте найти изменения самостоятельно. Для проверки нажмите на рисунок</div>
                 
-                <div class="image-hotspot" style="top: 25%; left: 10%;"></div>
+                <div class="image-hotspot" style="top: 15%; left: 10%;"></div>
                 <div class="hotspot-tooltip" id="tooltip1">
                     <strong>Подсказка:</strong> В правой части картинки границы ключицы и рёбер чёткие и ровные, а в левой части картинки — менее чёткие, потому что под этим пересечением в лёгких протекает туберкулёзный процесс.
                 </div>
@@ -962,7 +985,7 @@
             if (firstImageContainer) {
                 const hotspot = document.createElement('div');
                 hotspot.className = 'image-hotspot';
-                hotspot.style.top = '25%';
+                hotspot.style.top = '15%';
                 hotspot.style.left = '10%';
                 firstImageContainer.style.position = 'relative';
                 firstImageContainer.appendChild(hotspot);
