@@ -180,9 +180,14 @@
         .click-hint {
             text-align: center;
             color: #2c5aa0;
-            font-size: 14px;
-            margin-top: 8px;
+            font-size: 16px;
+            margin-top: 12px;
             font-style: italic;
+            background: #e8f4fd;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid #2c5aa0;
+            font-weight: 600;
         }
 
         .comparison-grid {
@@ -409,6 +414,17 @@
             animation: fadeIn 0.5s ease;
         }
 
+        .result-image {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .result-image.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
         /* Мобильная адаптация */
         @media (max-width: 768px) {
             body {
@@ -446,6 +462,11 @@
             .test-options {
                 grid-template-columns: 1fr;
             }
+            
+            .click-hint {
+                font-size: 14px;
+                padding: 8px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -471,6 +492,10 @@
             
             .author {
                 font-size: 12px;
+            }
+            
+            .click-hint {
+                font-size: 13px;
             }
         }
 
@@ -521,6 +546,10 @@
                 color: #333;
                 animation: none;
                 border: none;
+            }
+            
+            .click-hint {
+                display: none;
             }
         }
 
@@ -649,12 +678,11 @@
         
         <div class="case-study">
             <div class="case-title">Пациент «А» - Своевременное выявление</div>
-            <p>Флюорография выявила инфильтративный туберкулез в верхней доле <span class="blurred-text">правого</span> легкого.</p>
             
             <div class="image-container">
                 <div class="image-title">Пациент «А» — изменение в легочной ткани верхней доли <span class="blurred-text">правого</span> лёгкого</div>
                 <img src="image8.png" alt="Флюорография пациента А" onclick="showHotspot(this)">
-                <div class="click-hint">Если вы не смогли обнаружить изменения на снимке, нажмите на рисунок</div>
+                <div class="click-hint">Попробуйте найти изменения самостоятельно. Для проверки нажмите на рисунок</div>
                 
                 <div class="image-hotspot" style="top: 25%; left: 10%;"></div>
                 <div class="hotspot-tooltip" id="tooltip1">
@@ -663,12 +691,12 @@
             </div>
 
             <div class="image-container">
-                <div class="image-title">Пациент «А». Трёхмерное КТ-изображение с изменениями в <span class="blurred-text">правом</span> легком</div>
+                <div class="image-title">Пациент «А». Трёхмерное КТ-изображение с изменениями в правом легком</div>
                 <img src="image2.png" alt="КТ пациента А - 3D изображение">
             </div>
 
             <div class="image-container">
-                <div class="image-title">Пациент «А». Двухмерное КТ-изображение с очаговыми изменениями</div>
+                <div class="image-title">Пациент «А». Двухмерное КТ-изображение этого же пациента</div>
                 <img src="image3.png" alt="КТ пациента А - 2D изображение">
             </div>
         </div>
@@ -679,18 +707,18 @@
             
             <div class="comparison-grid">
                 <div class="image-container">
-                    <div class="image-title">Флюорография без видимых изменений</div>
+                    <div class="image-title">Флюорография пациента Б без видимых изменений</div>
                     <img src="image5.png" alt="Флюорография пациента Б - без видимых изменений">
                 </div>
                 <div class="image-container">
-                    <div class="image-title">КТ выявила начальную форму туберкулёза в верхней доле <span class="blurred-text">правого</span> легкого</div>
+                    <div class="image-title">КТ выявил начальную форму туберкулеза</div>
                     <img src="image4.png" alt="КТ пациента Б - начальные изменения">
                 </div>
             </div>
 
             <!-- Интерактивный тест -->
             <div class="test-container">
-                <div class="test-question">Посмотрите еще раз на КТ пациента Б. Ответьте на вопрос, где находится изменение. Хотите узнать, зачем пациенту с "чистой" флюорографией сделали КТ?</div>
+                <div class="test-question">Попробуйте найти пятно самостоятельно, выберите вариант ответа</div>
                 <div class="test-options">
                     <div class="test-option" onclick="selectOption(this)">Сверху справа на картинке</div>
                     <div class="test-option" onclick="selectOption(this)">Сверху слева на картинке</div>
@@ -699,6 +727,12 @@
                 </div>
                 <button class="test-button" onclick="checkAnswer()">Проверить ответ</button>
                 <div class="test-result" id="testResult"></div>
+                <div class="result-image" id="resultImage">
+                    <div class="image-container">
+                        <div class="image-title">Область изменений на КТ пациента Б</div>
+                        <img src="image9.png" alt="Область изменений на КТ пациента Б">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -779,6 +813,7 @@
         function checkAnswer() {
             const selectedOption = document.querySelector('.test-option.selected');
             const resultDiv = document.getElementById('testResult');
+            const resultImage = document.getElementById('resultImage');
             
             if (!selectedOption) {
                 alert('Пожалуйста, выберите вариант ответа');
@@ -797,6 +832,7 @@
             }
             
             resultDiv.style.display = 'block';
+            resultImage.classList.add('show');
         }
 
         // Функция для показа интерактивных подсказок на изображениях
