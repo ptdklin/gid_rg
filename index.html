@@ -170,6 +170,14 @@
             font-size: 14px;
         }
 
+        .click-hint {
+            text-align: center;
+            color: #2c5aa0;
+            font-size: 14px;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
         .comparison-grid {
             display: block;
             gap: 15px;
@@ -220,13 +228,6 @@
             border-radius: 10px;
             padding: 20px;
             margin: 20px 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .interactive-question:hover {
-            background: #d4e7fa;
-            transform: translateY(-2px);
         }
 
         .question-title {
@@ -361,7 +362,6 @@
             height: 120px;
             border: 3px solid #ff6b6b;
             border-radius: 50%;
-            cursor: pointer;
             animation: pulse 2s infinite;
             pointer-events: none;
             display: none;
@@ -543,6 +543,7 @@
         <p><strong>Туберкулез</strong> — опасное заболевание, которое на ранних стадиях протекает бессимптомно. Регулярная диагностика и знание правил профилактики спасают жизни. Вот всё, что важно знать:</p>
     </div>
 
+    <!-- Раздел 1: Основные методы скрининга -->
     <div class="section">
         <h2 class="section-title">1. Основные методы скрининга</h2>
         
@@ -572,18 +573,8 @@
         </div>
 
         <div class="subsection">
-            <h3 class="subsection-title">Компьютерная томография (КТ)</h3>
-            <p><strong>Зачем?</strong> Назначается при подозрениях на туберкулез, если флюорография не выявила изменений.</p>
-            <p><strong>Преимущество:</strong> Детальные снимки в 3D-формате, видны самые мелкие очаги.</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">2. Иммунодиагностика</h2>
-        
-        <div class="subsection">
-            <h3 class="subsection-title">Диаскинтест</h3>
-            <p><strong>Что это?</strong> Кожный тест, выявляющий активную туберкулезную инфекцию.</p>
+            <h3 class="subsection-title">Иммунодиагностика</h3>
+            <p><strong>Диаскинтест</strong> — кожный тест, выявляющий активную туберкулезную инфекцию.</p>
             <p><strong>Важно!</strong> Может обнаружить туберкулез, даже если флюорография «чистая».</p>
             <p><strong>Кому нужно?</strong></p>
             <ul>
@@ -593,8 +584,9 @@
         </div>
     </div>
 
+    <!-- Раздел 2: Внеочередные обследования -->
     <div class="section">
-        <h2 class="section-title">3. Внеочередные обследования</h2>
+        <h2 class="section-title">2. Внеочередные обследования</h2>
         <p class="subsection-title">Обязательны при контакте с больным туберкулезом</p>
         
         <div class="highlight-box">
@@ -618,8 +610,9 @@
         </div>
     </div>
 
+    <!-- Раздел 3: Группы повышенного риска -->
     <div class="section">
-        <h2 class="section-title">4. Группы повышенного риска заражения</h2>
+        <h2 class="section-title">3. Группы повышенного риска заражения</h2>
         <div class="risk-group">
             <div class="risk-column">
                 <h3 class="subsection-title">Медицинские показания</h3>
@@ -642,26 +635,23 @@
         </div>
     </div>
 
+    <!-- Раздел 4: Примеры из практики -->
     <div class="section">
-        <h2 class="section-title">5. Примеры из практики с визуализацией</h2>
+        <h2 class="section-title">4. Примеры из практики с визуализацией</h2>
         
         <div class="case-study">
             <div class="case-title">Пациент «А» - Своевременное выявление</div>
             <p>Флюорография выявила инфильтративный туберкулез в верхней доле <span class="blurred-text">правого</span> легкого.</p>
             
             <div class="image-container">
-                <img src="image8.png" alt="Флюорография пациента А - изменения в легком" onclick="showHotspot(this)">
+                <img src="image8.png" alt="Флюорография пациента А" onclick="showHotspot(this)">
                 <div class="image-caption">Пациент «А». Изменения в легочной ткани верхней доли <span class="blurred-text">правого</span> лёгкого</div>
+                <div class="click-hint">Для подсказки нажмите на картинку</div>
                 
-                <!-- Интерактивные подсказки -->
-                <div class="hotspot-tooltip" id="tooltip1">
-                    <strong>Область изменений:</strong> Обратите внимание на левую часть картинки - границы ключицы и ребер менее четкие из-за туберкулезного процесса в <strong>правом легком</strong> пациента.
-                </div>
-                <div class="image-hotspot" style="top: 40%; left: 30%;"></div>
+                <div class="image-hotspot" style="top: 33.3%; left: 16.6%;"></div>
             </div>
 
-            <!-- Интерактивный вопрос -->
-            <div class="interactive-question" onclick="toggleAnswer(this)">
+            <div class="interactive-question">
                 <div class="question-title">Сможете ли вы обнаружить изменения на снимке?</div>
                 <div class="answer">
                     <p><strong>Подсказка:</strong> В правой части картинки границы ключицы и рёбер четкие и ровные, а в левой части картинки — менее четкие, потому что под этим пересечением в легких протекает туберкулезный процесс.</p>
@@ -689,17 +679,9 @@
                     <div class="image-caption">Флюорография без видимых изменений</div>
                 </div>
                 <div class="image-container">
-                    <img src="image4.png" alt="КТ пациента Б - начальные изменения">
+                    <img src="image4.png" alt="КТ пациента Б - начальные изменения" onclick="showExplanation(this)">
                     <div class="image-caption">КТ выявила начальную форму туберкулёза в верхней доле <span class="blurred-text">правого</span> легкого</div>
-                </div>
-            </div>
-
-            <!-- Интерактивный вопрос с тестом -->
-            <div class="interactive-question" onclick="toggleAnswer(this)">
-                <div class="question-title">Почему назначили КТ при "чистой" флюорографии?</div>
-                <div class="answer">
-                    <p><strong>Ответ:</strong> Пациенту ранее был назначен диаскинтест в связи с контактом с больным туберкулезом. Результат теста был положительным, поэтому назначили КТ для уточнения диагноза.</p>
-                    <p>Выявленный процесс оказался настолько мал, что его ещё не видно на обычном флюорографическом снимке.</p>
+                    <div class="click-hint">Для подсказки нажмите на картинку</div>
                 </div>
             </div>
 
@@ -728,8 +710,9 @@
         </div>
     </div>
 
+    <!-- Раздел 5: Кто контролирует -->
     <div class="section">
-        <h2 class="section-title">6. Кто контролирует?</h2>
+        <h2 class="section-title">5. Кто контролирует?</h2>
         <ul>
             <li><strong>Участковые терапевты/педиатры</strong> — следят за группами риска</li>
             <li><strong>Работодатели</strong> — организуют ежегодные профосмотры</li>
@@ -746,8 +729,9 @@
         </ul>
     </div>
 
+    <!-- Раздел 6: Что делать -->
     <div class="section">
-        <h2 class="section-title">7. Что делать?</h2>
+        <h2 class="section-title">6. Что делать?</h2>
         <ul>
             <li>Не пропускайте плановые обследования</li>
             <li>При контакте с больным — срочно обратитесь к врачу</li>
@@ -774,7 +758,7 @@
     </div>
 
     <div class="author">
-        <p>Гид разработан Лукаш И.А., заведующим филиалом Клинский</p>
+        <p>Гид разработан заведующим филиалом Клинский, Лукаш И.А.</p>
     </div>
 
     <script>
@@ -821,21 +805,24 @@
         // Функция для показа интерактивных подсказок на изображениях
         function showHotspot(img) {
             const container = img.parentElement;
-            const tooltip = container.querySelector('.hotspot-tooltip');
             const hotspot = container.querySelector('.image-hotspot');
+            const answer = document.querySelector('.interactive-question .answer');
             
-            // Показываем подсказку и кольцо
-            tooltip.style.display = 'block';
-            tooltip.style.top = '20%';
-            tooltip.style.left = '60%';
-            
+            // Показываем кольцо и подсказку
             hotspot.classList.add('active');
+            if (answer && !answer.classList.contains('show')) {
+                answer.classList.add('show');
+            }
             
-            // Скрываем подсказку и кольцо через 5 секунд
+            // Скрываем кольцо через 5 секунд
             setTimeout(() => {
-                tooltip.style.display = 'none';
                 hotspot.classList.remove('active');
             }, 5000);
+        }
+
+        // Функция для показа объяснения по КТ
+        function showExplanation(img) {
+            alert('Пациенту ранее был назначен диаскинтест в связи с контактом с больным туберкулезом. Результат теста был положительным, поэтому назначили КТ для уточнения диагноза.\n\nВыявленный процесс оказался настолько мал, что его ещё не видно на обычном флюорографическом снимке.');
         }
 
         // Добавляем горячие точки на изображения при загрузке
@@ -845,8 +832,8 @@
             if (firstImageContainer) {
                 const hotspot = document.createElement('div');
                 hotspot.className = 'image-hotspot';
-                hotspot.style.top = '40%';
-                hotspot.style.left = '30%';
+                hotspot.style.top = '33.3%';
+                hotspot.style.left = '16.6%';
                 firstImageContainer.style.position = 'relative';
                 firstImageContainer.appendChild(hotspot);
             }
