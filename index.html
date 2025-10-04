@@ -371,43 +371,6 @@
             border: 1px solid #e0e0e0;
         }
 
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        .image-hotspot {
-            position: absolute;
-            width: 168px; /* Увеличено на 40% (было 120px) */
-            height: 168px; /* Увеличено на 40% (было 120px) */
-            border: 3px solid #ff6b6b;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-            pointer-events: none;
-            display: none;
-        }
-
-        .image-hotspot.active {
-            display: block;
-        }
-
-        @keyframes pulse {
-            0% { 
-                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
-                transform: scale(1);
-            }
-            50% { 
-                transform: scale(1.05);
-            }
-            70% { 
-                box-shadow: 0 0 0 15px rgba(255, 107, 107, 0); 
-            }
-            100% { 
-                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
-                transform: scale(1);
-            }
-        }
-
         .hotspot-tooltip {
             display: none;
             background: white;
@@ -509,6 +472,34 @@
             background: #1e3a8a;
             color: white;
             text-decoration: none;
+        }
+
+        .check-button {
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+            display: block;
+            margin: 15px auto;
+        }
+
+        .check-button:hover {
+            background: #1e3a8a;
+        }
+
+        .result-image-check {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .result-image-check.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
         }
 
         @keyframes fadeIn {
@@ -731,8 +722,7 @@
         <div class="highlight-box">
             <strong>Когда проходить?</strong>
             <ul>
-                <li>Проживание в одной квартире с больным</li>
-                <li>Тесный или длительный контакт</li>
+                <li>Контакт с больным туберкулёзом</li>
                 <li>Уведомление от медучреждения</li>
             </ul>
         </div>
@@ -773,7 +763,7 @@
             </div>
         </div>
         <div class="risk-note">
-            Помните: туберкулёзом заболевают не только группы повышенного риска.
+            Помните: туберкулёзом могут заболеть все, а не только группы повышенного риска.
         </div>
     </div>
 
@@ -782,17 +772,21 @@
         <h2 class="section-title">Примеры из практики с визуализацией</h2>
         
         <div class="case-study">
-            <div class="case-title">Пациент "А" — своевременное выявление</div>
+            <div class="case-title">Пациент "А" — своевременное выявление. Этот же пациент.</div>
             
             <div class="image-container">
                 <div class="image-title">Пациент "А".</div>
-                <img src="image8.png" alt="Флюорография пациента А" onclick="showHotspot(this)">
-                <div class="click-hint">Попробуйте найти изменения самостоятельно. Для проверки нажмите на рисунок</div>
+                <img src="image8.png" alt="Флюорография пациента А">
+                <div class="click-hint">Попробуйте найти изменения самостоятельно</div>
                 
-                <div class="image-hotspot" style="top: 15%; left: 10%;"></div>
-                <div class="hotspot-tooltip" id="tooltip1">
-                    <strong>Подсказка:</strong> В правой части картинки границы ключицы и рёбер чёткие и ровные, а в левой части картинки — менее чёткие, потому что под этим пересечением в лёгких протекает туберкулёзный процесс.
+                <div class="result-image-check" id="resultImageCheck">
+                    <div class="image-container">
+                        <div class="image-title">Область изменений на флюорографии пациента "А"</div>
+                        <img src="image10.png" alt="Область изменений на флюорографии пациента А">
+                    </div>
                 </div>
+                
+                <button class="check-button" onclick="showCheckResult()">Проверить</button>
             </div>
 
             <div class="image-container">
@@ -801,7 +795,7 @@
             </div>
 
             <div class="image-container">
-                <div class="image-title">Пациент "А". Двухмерное КТ-изображение этого же пациента.</div>
+                <div class="image-title">Пациент "А". Двухмерное КТ-изображение.</div>
                 <img src="image3.png" alt="КТ пациента А — 2D изображение">
             </div>
         </div>
@@ -834,7 +828,7 @@
                     </div>
                 </div>
 
-                <div class="test-options">
+                <div class="test-options" id="testOptions">
                     <div class="test-option" onclick="selectOption(this)">Сверху справа на картинке</div>
                     <div class="test-option" onclick="selectOption(this)">Сверху слева на картинке</div>
                     <div class="test-option" onclick="selectOption(this)">Снизу справа на картинке</div>
@@ -935,6 +929,7 @@
             const selectedOption = document.querySelector('.test-option.selected');
             const resultDiv = document.getElementById('testResult');
             const resultImage = document.getElementById('resultImage');
+            const testOptions = document.getElementById('testOptions');
             
             if (!selectedOption) {
                 alert('Пожалуйста, выберите вариант ответа');
@@ -954,6 +949,8 @@
             
             resultDiv.style.display = 'block';
             resultImage.classList.add('show');
+            // Скрываем варианты ответов после проверки
+            testOptions.style.display = 'none';
         }
 
         // Функция для показа ответа на дополнительный вопрос
@@ -962,35 +959,13 @@
             answerBox.classList.add('show');
         }
 
-        // Функция для показа интерактивных подсказок на изображениях
-        function showHotspot(img) {
-            const container = img.parentElement;
-            const hotspot = container.querySelector('.image-hotspot');
-            const tooltip = container.querySelector('.hotspot-tooltip');
-            
-            // Показываем кольцо и подсказку
-            hotspot.classList.add('active');
-            tooltip.classList.add('show');
-            
-            // Скрываем кольцо через 5 секунд
-            setTimeout(() => {
-                hotspot.classList.remove('active');
-            }, 5000);
+        // Функция для показа изображения с результатом проверки
+        function showCheckResult() {
+            const resultImageCheck = document.getElementById('resultImageCheck');
+            resultImageCheck.classList.add('show');
         }
 
-        // Добавляем горячие точки на изображения при загрузке
-        document.addEventListener('DOMContentLoaded', function() {
-            // Для первого изображения добавляем интерактивную зону
-            const firstImageContainer = document.querySelector('.image-container');
-            if (firstImageContainer) {
-                const hotspot = document.createElement('div');
-                hotspot.className = 'image-hotspot';
-                hotspot.style.top = '15%';
-                hotspot.style.left = '10%';
-                firstImageContainer.style.position = 'relative';
-                firstImageContainer.appendChild(hotspot);
-            }
-        });
+        // Удаляем все функции и элементы, связанные с кольцом
     </script>
 </body>
 </html>
