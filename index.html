@@ -884,7 +884,7 @@
                 <button class="test-button" id="testButton" onclick="checkAnswer(this)">Узнать ответ</button>
 
                 <div class="additional-question">
-                    Зачем пациенту сделали КТ, если неделю назад у него была чистая плановая флюорография?
+                    Зачем пациенту сделали КТ, если неделю назад у него была "чистая" плановая флюорография?
                 </div>
                 
                 <div class="answer-box" id="answerBox">
@@ -1046,14 +1046,15 @@
                 const hotspot3d = document.getElementById('hotspot3d');
                 const hotspot2d = document.getElementById('hotspot2d');
                 
-                // Позиционируем кольца в центре верхнего ЛЕВОГО квадрата
-                // 25% от ширины (центр левой половины), 16.67% от высоты (центр верхней трети)
-                hotspot3d.style.top = '16.67%';
-                hotspot3d.style.left = '25%';
+                // Позиционируем кольца: смещаем на 30% влево и на 35% вверх от предыдущей позиции
+                // Было: 25% left, 16.67% top
+                // Стало: 17.5% left (25% - 30% от 25%), 10.84% top (16.67% - 35% от 16.67%)
+                hotspot3d.style.top = '10.84%';
+                hotspot3d.style.left = '17.5%';
                 hotspot3d.style.transform = 'translate(-50%, -50%)';
                 
-                hotspot2d.style.top = '16.67%';
-                hotspot2d.style.left = '25%';
+                hotspot2d.style.top = '10.84%';
+                hotspot2d.style.left = '17.5%';
                 hotspot2d.style.transform = 'translate(-50%, -50%)';
                 
                 // Запускаем циклическое переключение каждые 1.5 секунды
