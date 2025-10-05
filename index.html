@@ -867,15 +867,15 @@
                 <img src="image8.png" alt="Флюорография пациента А">
                 <div class="click-hint">Попробуйте найти изменения самостоятельно</div>
                 
-                <div class="hint-box" id="hintBox">
-                    <strong>Подсказка:</strong> Обратите внимание, как справа хорошо видны границы ключицы и рёбер, а вот слева граница рёбер и ключицы выглядит не так четко, потому что под ними в легочной ткани протекает туберкулезный процесс.
-                </div>
-                
                 <div class="check-image" id="checkImage">
                     <div class="image-container">
                         <div class="image-title">Область изменений на флюорографии пациента "А"</div>
                         <img src="image10.png" alt="Область изменений на флюорографии пациента А">
                     </div>
+                </div>
+                
+                <div class="hint-box" id="hintBox">
+                    <strong>Подсказка:</strong> Обратите внимание, как справа хорошо видны границы ключицы и рёбер, а вот слева граница рёбер и ключицы выглядит не так четко, потому что под ними в легочной ткани протекает туберкулезный процесс.
                 </div>
                 
                 <button class="check-button" id="checkButton1" onclick="showAnswerAndImage(this)">Узнать ответ</button>
@@ -978,7 +978,7 @@
         <h2 class="action-title">Что делать?</h2>
         <ul class="action-list">
             <li><strong>Не пропускайте плановые обследования</strong></li>
-            <li><strong>При контакте с больном — срочно обратитесь к врачу</strong></li>
+            <li><strong>При контакте с больным — срочно обратитесь к врачу</strong></li>
             <li><strong>Если вы в группе риска — соблюдайте график скрининга</strong></li>
         </ul>
     </div>
@@ -1070,8 +1070,8 @@
             const hintBox = document.getElementById('hintBox');
             const checkImage = document.getElementById('checkImage');
             
-            hintBox.classList.add('show');
             checkImage.classList.add('show');
+            hintBox.classList.add('show');
             
             // Скрываем кнопку после нажатия
             button.style.display = 'none';
