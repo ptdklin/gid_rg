@@ -292,6 +292,7 @@
             margin-bottom: 20px;
             color: #2c5aa0;
             font-size: 18px;
+            text-align: center;
         }
 
         .test-options {
@@ -369,6 +370,38 @@
             user-select: none;
             -webkit-user-select: none;
             border: 1px solid #e0e0e0;
+        }
+
+        .image-hotspot {
+            position: absolute;
+            width: 168px;
+            height: 168px;
+            border: 3px solid #ff6b6b;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            pointer-events: none;
+            display: none;
+        }
+
+        .image-hotspot.active {
+            display: block;
+        }
+
+        @keyframes pulse {
+            0% { 
+                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+                transform: scale(1);
+            }
+            50% { 
+                transform: scale(1.05);
+            }
+            70% { 
+                box-shadow: 0 0 0 15px rgba(255, 107, 107, 0); 
+            }
+            100% { 
+                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
+                transform: scale(1);
+            }
         }
 
         .hotspot-tooltip {
@@ -491,13 +524,27 @@
             background: #1e3a8a;
         }
 
-        .result-image-check {
+        .check-image {
             display: none;
             text-align: center;
             margin: 20px 0;
         }
 
-        .result-image-check.show {
+        .check-image.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .hint-box {
+            display: none;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2c5aa0;
+        }
+
+        .hint-box.show {
             display: block;
             animation: fadeIn 0.5s ease;
         }
@@ -772,31 +819,30 @@
         <h2 class="section-title">Примеры из практики с визуализацией</h2>
         
         <div class="case-study">
-            <div class="case-title">Пациент "А" — своевременное выявление. Этот же пациент.</div>
+            <div class="case-title">Пациент "А" — своевременное выявление</div>
             
             <div class="image-container">
                 <div class="image-title">Пациент "А".</div>
                 <img src="image8.png" alt="Флюорография пациента А">
                 <div class="click-hint">Попробуйте найти изменения самостоятельно</div>
                 
-                <div class="result-image-check" id="resultImageCheck">
-                    <div class="image-container">
-                        <div class="image-title">Область изменений на флюорографии пациента "А"</div>
-                        <img src="image10.png" alt="Область изменений на флюорографии пациента А">
-                    </div>
+                <div class="hint-box" id="hintBox">
+                    <strong>Подсказка:</strong> Обратите внимание, как справа хорошо видны границы ключицы и рёбер, а вот слева граница рёбер и ключицы выглядит не так четко, потому что под ними в легочной ткани протекает туберкулезный процесс.
                 </div>
                 
-                <button class="check-button" onclick="showCheckResult()">Проверить</button>
+                <button class="check-button" id="checkButton1" onclick="showHint(this)">Узнать ответ</button>
             </div>
 
-            <div class="image-container">
-                <div class="image-title">Пациент "А". Трёхмерное КТ-изображение. Изменения отчётливо видны в левой верхней части рисунка.</div>
+            <div class="image-container" id="ct3dContainer">
+                <div class="image-title">Пациент "А". Этот же пациент. Трёхмерное КТ-изображение. Изменения отчётливо видны в левой верхней части рисунка.</div>
                 <img src="image2.png" alt="КТ пациента А — 3D изображение">
+                <div class="image-hotspot" id="hotspot3d"></div>
             </div>
 
-            <div class="image-container">
+            <div class="image-container" id="ct2dContainer">
                 <div class="image-title">Пациент "А". Двухмерное КТ-изображение.</div>
                 <img src="image3.png" alt="КТ пациента А — 2D изображение">
+                <div class="image-hotspot" id="hotspot2d"></div>
             </div>
         </div>
 
@@ -835,7 +881,7 @@
                     <div class="test-option" onclick="selectOption(this)">Снизу слева на картинке</div>
                 </div>
                 
-                <button class="test-button" onclick="checkAnswer()">Проверить ответ</button>
+                <button class="test-button" id="testButton" onclick="checkAnswer(this)">Узнать ответ</button>
 
                 <div class="additional-question">
                     Зачем пациенту сделали КТ, если неделю назад у него была чистая плановая флюорография?
@@ -845,7 +891,7 @@
                     После контакта с больным туберкулёзом у пациента выявили положительную пробу Диаскинтест. При этом плановая профилактическая флюорография, сделанная неделю назад, патологии не показала. Для уточнения диагноза была назначена КТ, которая выявила небольшой очаг, невидимый при стандартном рентгеновском исследовании.
                 </div>
                 
-                <button class="test-button" onclick="showAnswer()">Узнать ответ</button>
+                <button class="test-button" id="answerButton" onclick="showAnswer(this)">Узнать ответ</button>
             </div>
         </div>
 
@@ -862,7 +908,7 @@
 
     <!-- Кто контролирует -->
     <div class="section">
-        <h2 class="section-title">Кто контролирует?</h2>
+        <h2 class="section-title">Кто контролирует скрининг?</h2>
         <ul>
             <li><strong>Участковые терапевты или педиатры</strong> — следят за группами риска</li>
             <li><strong>Работодатели</strong> — организуют ежегодные профосмотры</li>
@@ -884,7 +930,7 @@
         <h2 class="action-title">Что делать?</h2>
         <ul class="action-list">
             <li><strong>Не пропускайте плановые обследования</strong></li>
-            <li><strong>При контакте с больным — срочно обратитесь к врачу</strong></li>
+            <li><strong>При контакте с больном — срочно обратитесь к врачу</strong></li>
             <li><strong>Если вы в группе риска — соблюдайте график скрининга</strong></li>
         </ul>
     </div>
@@ -925,7 +971,7 @@
         }
 
         // Функция проверки ответа в тесте
-        function checkAnswer() {
+        function checkAnswer(button) {
             const selectedOption = document.querySelector('.test-option.selected');
             const resultDiv = document.getElementById('testResult');
             const resultImage = document.getElementById('resultImage');
@@ -949,23 +995,71 @@
             
             resultDiv.style.display = 'block';
             resultImage.classList.add('show');
+            
             // Скрываем варианты ответов после проверки
             testOptions.style.display = 'none';
+            
+            // Скрываем кнопку после нажатия
+            button.style.display = 'none';
         }
 
         // Функция для показа ответа на дополнительный вопрос
-        function showAnswer() {
+        function showAnswer(button) {
             const answerBox = document.getElementById('answerBox');
             answerBox.classList.add('show');
+            
+            // Скрываем кнопку после нажатия
+            button.style.display = 'none';
         }
 
-        // Функция для показа изображения с результатом проверки
-        function showCheckResult() {
-            const resultImageCheck = document.getElementById('resultImageCheck');
-            resultImageCheck.classList.add('show');
+        // Функция для показа подсказки
+        function showHint(button) {
+            const hintBox = document.getElementById('hintBox');
+            hintBox.classList.add('show');
+            
+            // Скрываем кнопку после нажатия
+            button.style.display = 'none';
         }
 
-        // Удаляем все функции и элементы, связанные с кольцом
+        // Функция для циклического показа/скрытия колец
+        function toggleHotspots() {
+            const hotspot3d = document.getElementById('hotspot3d');
+            const hotspot2d = document.getElementById('hotspot2d');
+            
+            if (hotspot3d && hotspot2d) {
+                // Переключаем видимость каждые 1.5 секунды
+                const isVisible = hotspot3d.style.display === 'block';
+                
+                hotspot3d.style.display = isVisible ? 'none' : 'block';
+                hotspot2d.style.display = isVisible ? 'none' : 'block';
+            }
+        }
+
+        // Добавляем горячие точки на изображения при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            // Для КТ-изображений пациента А добавляем интерактивные зоны
+            const ct3dContainer = document.getElementById('ct3dContainer');
+            const ct2dContainer = document.getElementById('ct2dContainer');
+            
+            if (ct3dContainer && ct2dContainer) {
+                // Создаем и настраиваем кольца
+                const hotspot3d = document.getElementById('hotspot3d');
+                const hotspot2d = document.getElementById('hotspot2d');
+                
+                // Позиционируем кольца в центре верхнего ЛЕВОГО квадрата
+                // 25% от ширины (центр левой половины), 16.67% от высоты (центр верхней трети)
+                hotspot3d.style.top = '16.67%';
+                hotspot3d.style.left = '25%';
+                hotspot3d.style.transform = 'translate(-50%, -50%)';
+                
+                hotspot2d.style.top = '16.67%';
+                hotspot2d.style.left = '25%';
+                hotspot2d.style.transform = 'translate(-50%, -50%)';
+                
+                // Запускаем циклическое переключение каждые 1.5 секунды
+                setInterval(toggleHotspots, 1500);
+            }
+        });
     </script>
 </body>
 </html>
