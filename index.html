@@ -372,39 +372,6 @@
             border: 1px solid #e0e0e0;
         }
 
-        .image-hotspot {
-            position: absolute;
-            width: 168px;
-            height: 168px;
-            border: 3px solid #ff6b6b;
-            border-radius: 50%;
-            animation: pulse 0.1s ease-in-out;
-            pointer-events: none;
-            display: none;
-            transform: translate(-50%, -50%);
-        }
-
-        .image-hotspot.active {
-            display: block;
-        }
-
-        @keyframes pulse {
-            0% { 
-                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% { 
-                transform: translate(-50%, -50%) scale(1.05);
-            }
-            70% { 
-                box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); 
-            }
-            100% { 
-                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
         .hotspot-tooltip {
             display: none;
             background: white;
@@ -550,6 +517,69 @@
             animation: fadeIn 0.5s ease;
         }
 
+        .show-changes-button {
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+            display: block;
+            margin: 15px auto;
+        }
+
+        .show-changes-button:hover {
+            background: #1e3a8a;
+        }
+
+        .popup-image {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-image.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .popup-image img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .key-message {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #2c5aa0, #1e3a8a);
+            color: white;
+            border-radius: 15px;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.8;
+            box-shadow: 0 10px 30px rgba(44, 90, 160, 0.3);
+        }
+
+        .key-message p {
+            margin-bottom: 20px;
+        }
+
+        .key-message p:last-child {
+            margin-bottom: 0;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -602,9 +632,9 @@
                 font-size: 18px;
             }
             
-            .image-hotspot {
-                width: 100px;
-                height: 100px;
+            .key-message {
+                font-size: 20px;
+                padding: 25px;
             }
         }
 
@@ -641,9 +671,9 @@
                 font-size: 16px;
             }
             
-            .image-hotspot {
-                width: 80px;
-                height: 80px;
+            .key-message {
+                font-size: 18px;
+                padding: 20px;
             }
         }
 
@@ -854,13 +884,13 @@
             <div class="image-container" id="ct3dContainer">
                 <div class="image-title">Пациент "А". Этот же пациент. Трёхмерное КТ-изображение. Изменения отчётливо видны в левой верхней части рисунка.</div>
                 <img src="image2.png" alt="КТ пациента А — 3D изображение">
-                <div class="image-hotspot" id="hotspot3d"></div>
+                <button class="show-changes-button" onclick="showPopupImage('image13.png')">Показать изменения</button>
             </div>
 
             <div class="image-container" id="ct2dContainer">
                 <div class="image-title">Пациент "А". Двухмерное КТ-изображение.</div>
                 <img src="image3.png" alt="КТ пациента А — 2D изображение">
-                <div class="image-hotspot" id="hotspot2d"></div>
+                <button class="show-changes-button" onclick="showPopupImage('image12.png')">Показать изменения</button>
             </div>
         </div>
 
@@ -963,7 +993,7 @@
         </div>
     </div>
 
-    <div style="text-align: center; margin-top: 30px; color: #666; font-style: italic;">
+    <div class="key-message">
         <p>Помните: туберкулёз — это излечимое заболевание, но только при условии своевременного выявления.</p>
         <p>Не пренебрегайте профилактическими мерами — берегите себя и своих близких! 💙</p>
     </div>
@@ -973,8 +1003,13 @@
     </div>
 
     <div class="contact-info">
-        <p>По вопросам оформления интерактивных анкет, буклетов, статей и т.д. обращаться по телефону:</p>
-        <p>8-916-232-23-22</p>
+        <p>По вопросам оформления интерактивных анкет, буклетов, статей и т.д. обращаться по ссылке:</p>
+        <a href="https://t.me/klin_mokptd_bot" style="color: #2c5aa0; text-decoration: none; font-weight: bold;">https://t.me/klin_mokptd_bot</a>
+    </div>
+
+    <!-- Всплывающее окно для изображений -->
+    <div class="popup-image" id="popupImage">
+        <img id="popupImg" src="" alt="Изменения">
     </div>
 
     <script>
@@ -1042,56 +1077,23 @@
             button.style.display = 'none';
         }
 
-        // Функция для циклического показа/скрытия колец
-        function toggleHotspots() {
-            const hotspot3d = document.getElementById('hotspot3d');
-            const hotspot2d = document.getElementById('hotspot2d');
+        // Функция для показа всплывающего изображения
+        function showPopupImage(imageSrc) {
+            const popup = document.getElementById('popupImage');
+            const popupImg = document.getElementById('popupImg');
             
-            if (hotspot3d && hotspot2d) {
-                // Переключаем видимость каждые 2 секунды, показываем на 0.1 секунды
-                const isVisible = hotspot3d.style.display === 'block';
-                
-                if (isVisible) {
-                    // Скрываем кольца
-                    hotspot3d.style.display = 'none';
-                    hotspot2d.style.display = 'none';
-                } else {
-                    // Показываем кольца на 0.1 секунды
-                    hotspot3d.style.display = 'block';
-                    hotspot2d.style.display = 'block';
-                    
-                    // Через 0.1 секунды скрываем
-                    setTimeout(() => {
-                        hotspot3d.style.display = 'none';
-                        hotspot2d.style.display = 'none';
-                    }, 100);
-                }
-            }
+            popupImg.src = imageSrc;
+            popup.classList.add('show');
+            
+            // Автоматически закрываем через 2 секунды
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 2000);
         }
 
-        // Добавляем горячие точки на изображения при загрузке
-        document.addEventListener('DOMContentLoaded', function() {
-            // Для КТ-изображений пациента А добавляем интерактивные зоны
-            const ct3dContainer = document.getElementById('ct3dContainer');
-            const ct2dContainer = document.getElementById('ct2dContainer');
-            
-            if (ct3dContainer && ct2dContainer) {
-                // Создаем и настраиваем кольца
-                const hotspot3d = document.getElementById('hotspot3d');
-                const hotspot2d = document.getElementById('hotspot2d');
-                
-                // Позиционируем кольца: смещаем на 30% влево и на 35% вверх от предыдущей позиции
-                // Было: 25% left, 16.67% top
-                // Стало: 17.5% left (25% - 30% от 25%), 10.84% top (16.67% - 35% от 16.67%)
-                hotspot3d.style.top = '10.84%';
-                hotspot3d.style.left = '17.5%';
-                
-                hotspot2d.style.top = '10.84%';
-                hotspot2d.style.left = '17.5%';
-                
-                // Запускаем циклическое переключение каждые 2 секунды
-                setInterval(toggleHotspots, 2000);
-            }
+        // Закрытие всплывающего окна при клике
+        document.getElementById('popupImage').addEventListener('click', function() {
+            this.classList.remove('show');
         });
     </script>
 </body>
