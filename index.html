@@ -1263,7 +1263,11 @@
                 }, 1000);
             } else {
                 resultDiv.className = 'test-result incorrect';
-                resultDiv.innerHTML = '❌ <strong>Неверно.</strong> Попробуйте еще раз.';
+                resultDiv.innerHTML = '❌ <strong>Неверно.</strong>';
+                // Показываем всплывающее изображение с правильным ответом даже при неверном ответе
+                setTimeout(() => {
+                    showPopupImage('image9.png');
+                }, 1000);
             }
             
             resultDiv.style.display = 'block';
