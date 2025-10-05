@@ -41,6 +41,13 @@
             font-weight: 700;
         }
 
+        .header .subtitle {
+            font-size: 18px;
+            color: #2c5aa0;
+            font-weight: 600;
+            font-style: italic;
+        }
+
         .intro {
             background: linear-gradient(135deg, #e8f4fd, #d4e7fa);
             padding: 20px;
@@ -52,6 +59,11 @@
         .intro p {
             font-size: 16px;
             line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
         }
 
         .section {
@@ -191,6 +203,7 @@
             background: #f8f9fa;
             border-radius: 8px;
             position: relative;
+            transition: all 0.5s ease;
         }
 
         .image-container img {
@@ -199,6 +212,7 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             cursor: pointer;
+            transition: all 0.5s ease;
         }
 
         .image-caption {
@@ -354,6 +368,7 @@
             transition: background 0.3s ease;
             display: block;
             margin: 0 auto;
+            animation: intenseBlink 1.5s infinite;
         }
 
         .test-button:hover {
@@ -487,7 +502,7 @@
             display: block;
             margin: 20px auto;
             box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-            animation: pulse 2s infinite, shake 0.5s infinite;
+            animation: intenseBlink 1.5s infinite;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -534,7 +549,7 @@
             display: block;
             margin: 20px auto;
             box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
-            animation: pulse 2s infinite, shake 0.5s infinite;
+            animation: intenseBlink 1.5s infinite;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -601,6 +616,21 @@
             margin: 20px 0;
         }
 
+        .images-side-by-side {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .image-pair {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
         .conclusion-box {
             background: linear-gradient(135deg, #e8f4fd, #d4e7fa);
             padding: 25px;
@@ -624,7 +654,7 @@
             display: inline-block;
             margin: 20px 10px;
             box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
-            animation: pulse 2s infinite, shake 0.5s infinite;
+            animation: intenseBlink 1.5s infinite;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -651,7 +681,7 @@
         }
 
         .blinking-text {
-            animation: blink 1.5s infinite, shake 0.8s infinite;
+            animation: intenseBlink 1.5s infinite;
             font-size: 24px;
             font-weight: 700;
             color: #ff6b6b;
@@ -663,21 +693,9 @@
             border: 3px solid #ff6b6b;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0.7; }
+        @keyframes intenseBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
         @keyframes fadeIn {
@@ -745,6 +763,11 @@
             .blinking-text {
                 font-size: 20px;
                 padding: 15px;
+            }
+            
+            .images-side-by-side {
+                flex-direction: column;
+                gap: 10px;
             }
         }
 
@@ -882,6 +905,7 @@
 <body>
     <div class="header">
         <h1>Гид по раннему выявлению туберкулёза</h1>
+        <div class="subtitle">Филиал Клинский</div>
     </div>
 
     <div class="intro">
@@ -931,7 +955,7 @@
                 <li>Те же группы, что и для ежегодной флюорографии (ежегодно только для пациентов с диабетом или иммунодефицитом).</li>
                 <li>Детям с 8 лет и подросткам</li>
             </ul>
-            <p><strong>Альтернативы:</strong> Квантифероновый тест (гамма-интерфероновый тест) и тест T-SPOT TB.</p>
+            <p><strong>Альтернативы:</strong> Квантифероновый тест и тест T-SPOT TB.</p>
         </div>
     </div>
 
@@ -1002,9 +1026,15 @@
                 <div class="click-hint">Попробуйте найти изменения самостоятельно</div>
                 
                 <div class="check-image" id="checkImage">
-                    <div class="image-container">
-                        <div class="image-title">Область изменений на флюорографии пациента "А" выделена красным</div>
-                        <img src="image10.png" alt="Область изменений на флюорографии пациента А">
+                    <div class="images-side-by-side" id="imagePair">
+                        <div class="image-pair">
+                            <div class="image-title">Исходное изображение</div>
+                            <img src="image8.png" alt="Флюорография пациента А" id="originalImage">
+                        </div>
+                        <div class="image-pair">
+                            <div class="image-title">Область изменений выделена</div>
+                            <img src="image10.png" alt="Область изменений на флюорографии пациента А" id="highlightedImage">
+                        </div>
                     </div>
                 </div>
                 
@@ -1033,7 +1063,8 @@
             </div>
             
             <div class="conclusion-box">
-                КТ позволяет заглянуть внутрь организма с такой детализацией, которая недоступна для обычного рентгена, поэтому мы находим проблему даже на ранней стадии.
+                <p>КТ позволяет заглянуть внутрь организма с такой детализацией, которая недоступна для обычного рентгена.</p>
+                <p>Поэтому мы находим проблему даже на ранней стадии.</p>
             </div>
             
             <div class="button-container">
@@ -1206,17 +1237,25 @@
             const checkImage = document.getElementById('checkImage');
             const afterAnswerText = document.getElementById('afterAnswerText');
             const patientAImage = document.getElementById('patientAImage');
+            const imagePair = document.getElementById('imagePair');
+            const originalImage = document.getElementById('originalImage');
+            const highlightedImage = document.getElementById('highlightedImage');
             
             checkImage.classList.add('show');
             hintBox.classList.add('show');
             afterAnswerText.style.display = 'block';
-            patientAImage.classList.add('enlarged-image');
+            
+            // Увеличиваем и сближаем изображения
+            patientAImage.style.display = 'none';
+            imagePair.style.display = 'flex';
+            originalImage.classList.add('enlarged-image');
+            highlightedImage.classList.add('enlarged-image');
             
             // Скрываем кнопку после нажатия
             button.style.display = 'none';
             
-            // Прокручиваем к увеличенному изображению
-            patientAImage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Прокручиваем к увеличенным изображениям
+            imagePair.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         // Функция для показа всплывающего изображения
