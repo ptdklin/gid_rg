@@ -123,29 +123,6 @@
             color: #666;
         }
 
-        /* Добавляем отступы для заголовков перед списками */
-        .subsection p + ul,
-        .highlight-box strong + ul {
-            margin-top: 15px;
-        }
-
-        .subsection-title + .highlight-box {
-            margin-top: 15px;
-        }
-
-        .subsection p + p {
-            margin-top: 15px;
-        }
-
-        ul + p {
-            margin-top: 15px;
-        }
-
-        /* Отступы для вложенных списков внутри li */
-        li > .nested-list {
-            margin-top: 10px;
-        }
-
         .highlight-box {
             background: #fff3cd;
             border: 1px solid #ffeaa7;
@@ -215,13 +192,6 @@
             transition: all 0.5s ease;
         }
 
-        .image-caption {
-            font-style: italic;
-            color: #666;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
         .image-title {
             font-weight: 700;
             color: #2c5aa0;
@@ -248,20 +218,6 @@
             margin: 20px 0;
         }
 
-        .qr-section {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .qr-text {
-            margin-bottom: 15px;
-            font-size: 14px;
-            color: #666;
-        }
-
         .risk-group {
             display: block;
             gap: 20px;
@@ -273,24 +229,6 @@
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
-        }
-
-        .author {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 25px;
-            border-top: 1px solid #e0e0e0;
-            color: #666;
-            font-size: 14px;
-            font-style: italic;
-        }
-
-        .contact-info {
-            text-align: center;
-            margin-top: 15px;
-            color: #666;
-            font-size: 12px;
-            font-style: italic;
         }
 
         /* Интерактивные элементы */
@@ -375,51 +313,6 @@
             background: #1e3a8a;
         }
 
-        .blurred-text {
-            background: linear-gradient(90deg, #f0f0f0 25%, #ffffff 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: shimmer 2s infinite;
-            color: transparent;
-            border-radius: 3px;
-            padding: 1px 4px;
-            user-select: none;
-            -webkit-user-select: none;
-            border: 1px solid #e0e0e0;
-        }
-
-        .hotspot-tooltip {
-            display: none;
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            border-left: 4px solid #2c5aa0;
-        }
-
-        .hotspot-tooltip.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .result-image {
-            display: none;
-            text-align: center;
-            margin: 25px 0;
-        }
-
-        .result-image.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .additional-question {
-            text-align: center;
-            margin: 30px 0 20px 0;
-            font-size: 20px;
-            font-weight: 600;
-            color: #2c5aa0;
-        }
-
         .answer-box {
             display: none;
             background: #e8f4fd;
@@ -468,26 +361,6 @@
             font-weight: bold;
             position: absolute;
             left: 0;
-        }
-
-        .telegram-button {
-            background: #2c5aa0;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
-            display: inline-block;
-            margin-top: 15px;
-            text-decoration: none;
-        }
-
-        .telegram-button:hover {
-            background: #1e3a8a;
-            color: white;
-            text-decoration: none;
         }
 
         .check-button {
@@ -763,11 +636,6 @@
                 padding: 20px;
             }
             
-            .author {
-                font-size: 13px;
-                margin-top: 30px;
-            }
-            
             .test-options {
                 grid-template-columns: 1fr;
             }
@@ -775,15 +643,6 @@
             .click-hint {
                 font-size: 18px;
                 padding: 12px;
-            }
-            
-            .additional-question {
-                font-size: 18px;
-            }
-            
-            .key-message {
-                font-size: 20px;
-                padding: 25px;
             }
             
             .check-button, .show-changes-button, .continue-button, .no-button {
@@ -828,21 +687,8 @@
                 font-size: 15px;
             }
             
-            .author {
-                font-size: 12px;
-            }
-            
             .click-hint {
                 font-size: 16px;
-            }
-            
-            .additional-question {
-                font-size: 16px;
-            }
-            
-            .key-message {
-                font-size: 18px;
-                padding: 20px;
             }
             
             .check-button, .show-changes-button, .continue-button, .no-button {
@@ -858,101 +704,6 @@
             .changes-label {
                 font-size: 16px;
                 padding: 8px;
-            }
-        }
-
-        /* Стили для печати */
-        @media print {
-            body {
-                box-shadow: none;
-                padding: 15mm;
-                background: white;
-                max-width: 100%;
-                margin: 0;
-                font-family: 'Merriweather', 'Georgia', serif;
-            }
-            
-            .section {
-                page-break-inside: avoid;
-            }
-            
-            .highlight-box, .case-study {
-                page-break-inside: avoid;
-            }
-
-            .image-container {
-                page-break-inside: avoid;
-            }
-            
-            .risk-group {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .comparison-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .author {
-                margin-top: 20mm;
-                font-size: 12px;
-            }
-            
-            .test-container {
-                display: none;
-            }
-            
-            .blurred-text {
-                background: none;
-                color: #333;
-                animation: none;
-                border: none;
-            }
-            
-            .click-hint {
-                display: none;
-            }
-            
-            .check-button, .show-changes-button, .continue-button, .no-button {
-                display: none;
-            }
-            
-            .blinking-text {
-                animation: none;
-                border: 1px solid #ccc;
-                color: #333;
-            }
-            
-            .hint-box {
-                display: block !important;
-                background: none;
-                border: 1px solid #ccc;
-                color: #333;
-                animation: none;
-            }
-            
-            .changes-label {
-                animation: none;
-                border: 1px solid #ccc;
-                color: #333;
-            }
-        }
-
-        /* Для десктопов возвращаем нормальную верстку */
-        @media (min-width: 769px) {
-            body {
-                padding: 20mm;
-            }
-            
-            .risk-group {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .comparison-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
@@ -1073,10 +824,10 @@
         <h2 class="section-title">Примеры из практики с визуализацией</h2>
         
         <div class="case-study">
-            <div class="case-title"> — своевременное выявление</div>
+            <div class="case-title">Пациент "А" — своевременное выявление</div>
             
             <div class="image-container">
-                <div class="image-title">.</div>
+                <!-- УДАЛЕНО: "Пациент 'А'." -->
                 <img src="image8.png" alt="Флюорография пациента А" id="patientAImage">
                 <div class="click-hint">Попробуйте найти изменения самостоятельно</div>
                 
@@ -1130,7 +881,7 @@
             </div>
         </div>
 
-        <!-- ВСЯ ИНФОРМАЦИЯ ПОСЛЕ КНОПКИ "ДА" СКРЫТА -->
+        <!-- ВСЁ что ниже - скрыто и откроется только после нажатия "Да" -->
         <div id="hiddenContent" style="display: none;">
             <div class="case-study">
                 <div class="case-title">Пациент "Б" — скрытый процесс</div>
@@ -1149,9 +900,17 @@
 
                 <!-- Интерактивный тест -->
                 <div class="test-container">
-                    <div class="test-question">Попробуйте найти пятно на КТ-изображении самостоятельно. Выберите вариант ответа</div>
+                    <div class="test-question">Попробуйте найти "пятно" на КТ-изображении самостоятельно. Выберите вариант ответа</div>
                     
                     <div class="test-result" id="testResult"></div>
+                    
+                    <!-- Фотография ответа теперь просто появляется в тексте -->
+                    <div class="result-image" id="resultImage">
+                        <div class="image-container">
+                            <div class="image-title">Область изменений на КТ пациента "Б"</div>
+                            <img src="image9.png" alt="Область изменений на КТ пациента Б">
+                        </div>
+                    </div>
 
                     <div class="test-options" id="testOptions">
                         <div class="test-option" onclick="selectOption(this)">Сверху справа на картинке</div>
@@ -1175,10 +934,11 @@
             </div>
 
             <div class="case-study">
-                <div class="case-title">Пациент "В" — запущенный случай</div>
+                <div class="case-title">Пациент "Б" — запущенный случай</div>
                 <p>Позднее выявление, разрушенные лёгкие. Прогноз неблагоприятный.</p>
                 
                 <div class="image-container">
+                    <div class="image-title">Пациент "Б". Запущенный случай туберкулёза.</div>
                     <img src="image6.png" alt="Запущенный случай туберкулёза">
                 </div>
             </div>
@@ -1244,6 +1004,7 @@
         function checkAnswer(button) {
             const selectedOption = document.querySelector('.test-option.selected');
             const resultDiv = document.getElementById('testResult');
+            const resultImage = document.getElementById('resultImage');
             const testOptions = document.getElementById('testOptions');
             
             if (!selectedOption) {
@@ -1257,20 +1018,13 @@
             if (answer === correctAnswer) {
                 resultDiv.className = 'test-result correct';
                 resultDiv.innerHTML = '✅ <strong>Правильно!</strong> Изменения действительно находятся сверху справа на картинке.';
-                // Показываем всплывающее изображение с правильным ответом
-                setTimeout(() => {
-                    showPopupImage('image9.png');
-                }, 1000);
             } else {
                 resultDiv.className = 'test-result incorrect';
                 resultDiv.innerHTML = '❌ <strong>Неверно.</strong>';
-                // Показываем всплывающее изображение с правильным ответом даже при неверном ответе
-                setTimeout(() => {
-                    showPopupImage('image9.png');
-                }, 6000);
             }
             
             resultDiv.style.display = 'block';
+            resultImage.classList.add('show');
             
             // Скрываем варианты ответов после проверки
             testOptions.style.display = 'none';
