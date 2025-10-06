@@ -262,6 +262,7 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .test-option:hover {
@@ -273,6 +274,18 @@
             background: #e8f4fd;
             border-color: #2c5aa0;
             color: #2c5aa0;
+        }
+
+        .test-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .test-option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
         }
 
         .test-result {
@@ -295,22 +308,93 @@
             color: #721c24;
         }
 
-        .test-button {
-            background: #2c5aa0;
+        /* УЛУЧШЕННЫЕ СТИЛИ КНОПОК */
+        .action-button {
+            background: linear-gradient(135deg, #2c5aa0, #1e3a8a);
             color: white;
             border: none;
-            padding: 15px 35px;
-            border-radius: 6px;
+            padding: 18px 40px;
+            border-radius: 50px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
+            font-size: 18px;
+            font-weight: 700;
             display: block;
-            margin: 0 auto;
-            animation: intenseBlink 1.5s infinite, shake 0.8s infinite;
+            margin: 25px auto;
+            box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: intenseBlink 2s infinite, gentlePulse 2s infinite;
         }
 
-        .test-button:hover {
-            background: #1e3a8a;
+        .action-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(44, 90, 160, 0.6);
+        }
+
+        .action-button:active {
+            transform: translateY(1px);
+        }
+
+        .test-button {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            display: block;
+            margin: 25px auto;
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+            transition: all 0.3s ease;
+            border: 3px solid white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: intenseBlink 2s infinite, gentlePulse 2s infinite;
+        }
+
+        .continue-button {
+            background: linear-gradient(135deg, #2196F3, #42A5F5);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 20px 15px;
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+            transition: all 0.3s ease;
+            border: 3px solid white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: intenseBlink 2s infinite, gentlePulse 2s infinite;
+            min-width: 150px;
+        }
+
+        .no-button {
+            background: linear-gradient(135deg, #9E9E9E, #BDBDBD);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 20px 15px;
+            box-shadow: 0 4px 15px rgba(158, 158, 158, 0.4);
+            cursor: not-allowed;
+            opacity: 0.6;
+            border: 3px solid white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 150px;
         }
 
         .answer-box {
@@ -363,28 +447,6 @@
             left: 0;
         }
 
-        .check-button {
-            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: 700;
-            display: block;
-            margin: 20px auto;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-            animation: intenseBlink 1.5s infinite, shake 0.8s infinite;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .check-button:hover {
-            transform: scale(1.05);
-        }
-
         .check-image {
             display: none;
             text-align: center;
@@ -417,28 +479,6 @@
             animation: expandHint 0.5s ease forwards;
         }
 
-        .show-changes-button {
-            background: linear-gradient(135deg, #4CAF50, #66BB6A);
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: 700;
-            display: block;
-            margin: 20px auto;
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
-            animation: intenseBlink 1.5s infinite, shake 0.8s infinite;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .show-changes-button:hover {
-            transform: scale(1.05);
-        }
-
         .popup-image {
             display: none;
             position: fixed;
@@ -446,7 +486,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.9);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -465,6 +505,7 @@
             border-radius: 8px;
             box-shadow: 0 0 30px rgba(0,0,0,0.5);
             margin-bottom: 20px;
+            border: 3px solid #2c5aa0;
         }
 
         .popup-hint {
@@ -475,6 +516,26 @@
             text-align: center;
             font-size: 16px;
             line-height: 1.5;
+            border: 2px solid #2c5aa0;
+            margin-top: 15px;
+        }
+
+        .popup-hint.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .popup-hint.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
         }
 
         .key-message {
@@ -548,39 +609,6 @@
             text-align: center;
         }
 
-        .continue-button {
-            background: linear-gradient(135deg, #2196F3, #42A5F5);
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: 700;
-            display: inline-block;
-            margin: 20px 10px;
-            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
-            animation: intenseBlink 1.5s infinite, shake 0.8s infinite;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .no-button {
-            background: linear-gradient(135deg, #9E9E9E, #BDBDBD);
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 700;
-            display: inline-block;
-            margin: 20px 10px;
-            box-shadow: 0 4px 15px rgba(158, 158, 158, 0.4);
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-
         .button-container {
             text-align: center;
             margin: 30px 0;
@@ -605,7 +633,12 @@
 
         @keyframes intenseBlink {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         @keyframes shake {
@@ -668,9 +701,10 @@
                 padding: 12px;
             }
             
-            .check-button, .show-changes-button, .continue-button, .no-button {
-                padding: 12px 25px;
+            .action-button, .test-button, .continue-button, .no-button {
+                padding: 15px 30px;
                 font-size: 16px;
+                margin: 20px auto;
             }
             
             .blinking-text {
@@ -714,9 +748,10 @@
                 font-size: 16px;
             }
             
-            .check-button, .show-changes-button, .continue-button, .no-button {
-                padding: 10px 20px;
+            .action-button, .test-button, .continue-button, .no-button {
+                padding: 12px 25px;
                 font-size: 14px;
+                margin: 15px auto;
             }
             
             .blinking-text {
@@ -727,6 +762,16 @@
             .changes-label {
                 font-size: 16px;
                 padding: 8px;
+            }
+            
+            .button-container {
+                margin: 20px 0;
+            }
+            
+            .continue-button, .no-button {
+                display: block;
+                margin: 10px auto;
+                width: 80%;
             }
         }
     </style>
@@ -853,7 +898,7 @@
                 <img src="image8.png" alt="Флюорография пациента А" id="patientAImage">
                 <div class="click-hint">Попробуйте найти изменения самостоятельно</div>
                 
-                <button class="check-button" id="checkButton1" onclick="showAnswerPopup()">Посмотреть ответ</button>
+                <button class="action-button" id="checkButton1" onclick="showAnswerPopup()">Нажать сюда и посмотреть ответ</button>
             </div>
 
             <!-- Скрытый контент после первой кнопки -->
@@ -861,7 +906,7 @@
                 <div class="image-container" id="ct3dContainer">
                     <div class="image-title">3D КТ-сканирование того же пациента "А".</div>
                     <img src="image2.png" alt="КТ пациента А — 3D изображение">
-                    <button class="show-changes-button" onclick="showPopupImage('image13.png', 'contentAfterSecondButton')">Показать изменения</button>
+                    <button class="action-button" id="buttonImage2" onclick="showPopupImage('image13.png', 'contentAfterSecondButton', 'buttonImage2')">Нажать сюда и посмотреть ответ</button>
                 </div>
 
                 <!-- Скрытый контент после второй кнопки -->
@@ -869,7 +914,7 @@
                     <div class="image-container" id="ct2dContainer">
                         <div class="image-title">Теперь посмотрите на 2D КТ-сканирование того же пациента "А".</div>
                         <img src="image3.png" alt="КТ пациента А — 2D изображение">
-                        <button class="show-changes-button" onclick="showPopupImage('image12.png', 'contentAfterThirdButton')">Показать изменения</button>
+                        <button class="action-button" id="buttonImage3" onclick="showPopupImage('image12.png', 'contentAfterThirdButton', 'buttonImage3')">Нажать сюда и посмотреть ответ</button>
                     </div>
                     
                     <!-- Скрытый контент после третьей кнопки -->
@@ -907,7 +952,7 @@
                 </div>
 
                 <!-- Интерактивный тест -->
-                <div class="test-container">
+                <div class="test-container" id="testContainer">
                     <div class="test-question">Попробуйте найти "пятно" на КТ-изображении самостоятельно. Выберите вариант ответа</div>
 
                     <div class="test-options" id="testOptions">
@@ -918,65 +963,65 @@
                     </div>
                     
                     <button class="test-button" id="testButton" onclick="checkAnswerAndShowPopup()">Посмотреть ответ</button>
+                </div>
 
-                    <!-- Скрытый контент после теста -->
-                    <div class="hidden-content" id="contentAfterTest">
-                        <div class="blinking-text">
-                            Зачем пациенту сделали КТ, если неделю назад у него была "чистая" плановая флюорография?
+                <!-- Скрытый контент после теста - ВЫНЕСЕН ИЗ ТЕСТОВОГО КОНТЕЙНЕРА -->
+                <div class="hidden-content" id="contentAfterTest">
+                    <div class="blinking-text">
+                        Зачем пациенту сделали КТ, если неделю назад у него была "чистая" плановая флюорография?
+                    </div>
+                    
+                    <button class="test-button" id="answerButton" onclick="showTextAnswerPopup()">Посмотреть ответ</button>
+
+                    <!-- Скрытый контент после ответа -->
+                    <div class="hidden-content" id="contentAfterAnswer">
+                        <div class="case-study">
+                            <div class="case-title">Пациент "В" — запущенный случай</div>
+                            <p>Позднее выявление, разрушенные лёгкие. Прогноз неблагоприятный.</p>
+                            
+                            <div class="image-container">
+                                <div class="image-title">Пациент "В". Запущенный случай туберкулёза.</div>
+                                <img src="image6.png" alt="Запущенный случай туберкулёза">
+                            </div>
                         </div>
-                        
-                        <button class="test-button" id="answerButton" onclick="showTextAnswerPopup()">Посмотреть ответ</button>
 
-                        <!-- Скрытый контент после ответа -->
-                        <div class="hidden-content" id="contentAfterAnswer">
-                            <div class="case-study">
-                                <div class="case-title">Пациент "В" — запущенный случай</div>
-                                <p>Позднее выявление, разрушенные лёгкие. Прогноз неблагоприятный.</p>
-                                
-                                <div class="image-container">
-                                    <div class="image-title">Пациент "В". Запущенный случай туберкулёза.</div>
-                                    <img src="image6.png" alt="Запущенный случай туберкулёза">
-                                </div>
-                            </div>
+                        <!-- Кто контролирует -->
+                        <div class="section">
+                            <h2 class="section-title">Кто контролирует скрининг?</h2>
+                            <ul>
+                                <li><strong>Участковые терапевты или педиатры</strong> — следят за группами риска</li>
+                                <li><strong>Работодатели</strong> — организуют ежегодные профосмотры</li>
+                                <li><strong>Фтизиатры</strong> — курируют пациентов с подозрением на туберкулёз</li>
+                            </ul>
+                        </div>
 
-                            <!-- Кто контролирует -->
-                            <div class="section">
-                                <h2 class="section-title">Кто контролирует скрининг?</h2>
-                                <ul>
-                                    <li><strong>Участковые терапевты или педиатры</strong> — следят за группами риска</li>
-                                    <li><strong>Работодатели</strong> — организуют ежегодные профосмотры</li>
-                                    <li><strong>Фтизиатры</strong> — курируют пациентов с подозрением на туберкулёз</li>
-                                </ul>
-                            </div>
+                        <div class="highlight-box">
+                            <h3 class="subsection-title">Почему это жизненно важно?</h3>
+                            <ul>
+                                <li><strong>Туберкулёз заразен</strong></li>
+                                <li><strong>Поздняя диагностика</strong> приводит к разрушению лёгких</li>
+                                <li><strong>Раннее лечение</strong> имеет эффективность до 95%</li>
+                            </ul>
+                        </div>
 
-                            <div class="highlight-box">
-                                <h3 class="subsection-title">Почему это жизненно важно?</h3>
-                                <ul>
-                                    <li><strong>Туберкулёз заразен</strong></li>
-                                    <li><strong>Поздняя диагностика</strong> приводит к разрушению лёгких</li>
-                                    <li><strong>Раннее лечение</strong> имеет эффективность до 95%</li>
-                                </ul>
-                            </div>
+                        <!-- Что делать -->
+                        <div class="action-section">
+                            <h2 class="action-title">Что делать?</h2>
+                            <ul class="action-list">
+                                <li><strong>Не пропускайте плановые обследования</strong></li>
+                                <li><strong>При контакте с больным — срочно обратитесь к врачу</strong></li>
+                                <li><strong>Если вы в группе риска — соблюдайте график скрининга</strong></li>
+                            </ul>
+                        </div>
 
-                            <!-- Что делать -->
-                            <div class="action-section">
-                                <h2 class="action-title">Что делать?</h2>
-                                <ul class="action-list">
-                                    <li><strong>Не пропускайте плановые обследования</strong></li>
-                                    <li><strong>При контакте с больным — срочно обратитесь к врачу</strong></li>
-                                    <li><strong>Если вы в группе риска — соблюдайте график скрининга</strong></li>
-                                </ul>
-                            </div>
+                        <div class="contact-box">
+                            <p><strong>Если есть вопросы — задайте их фтизиатру или терапевту</strong></p>
+                            <p>Осведомлён — значит защищён!</p>
+                        </div>
 
-                            <div class="contact-box">
-                                <p><strong>Если есть вопросы — задайте их фтизиатру или терапевту</strong></p>
-                                <p>Осведомлён — значит защищён!</p>
-                            </div>
-
-                            <div class="key-message">
-                                <p>Помните: туберкулёз — это излечимое заболевание, но только при условии своевременного выявления.</p>
-                                <p>Не пренебрегайте профилактическими мерами — берегите себя и своих близких! 💙</p>
-                            </div>
+                        <div class="key-message">
+                            <p>Помните: туберкулёз — это излечимое заболевание, но только при условии своевременного выявления.</p>
+                            <p>Не пренебрегайте профилактическими мерами — берегите себя и своих близких! 💙</p>
                         </div>
                     </div>
                 </div>
@@ -998,6 +1043,9 @@
 
     <div class="popup-image" id="testPopup">
         <img src="image9.png" alt="Область изменений на КТ пациента Б">
+        <div class="popup-hint" id="testHint">
+            <!-- Текст подсказки будет заполнен динамически -->
+        </div>
     </div>
 
     <div class="popup-image" id="answerPopup">
@@ -1025,16 +1073,18 @@
             const image10Popup = document.getElementById('image10Popup');
             image10Popup.classList.add('show');
             image10Popup.dataset.nextContent = 'contentAfterFirstButton';
+            image10Popup.dataset.buttonId = 'checkButton1';
         }
 
         // Функция для показа всплывающего изображения
-        function showPopupImage(imageSrc, nextContentId) {
+        function showPopupImage(imageSrc, nextContentId, buttonId) {
             const popup = document.getElementById('popupImage');
             const popupImg = document.getElementById('popupImg');
             
             popupImg.src = imageSrc;
             popup.classList.add('show');
             popup.dataset.nextContent = nextContentId;
+            popup.dataset.buttonId = buttonId;
         }
 
         // Функция проверки ответа в тесте и показа всплывающего окна
@@ -1049,10 +1099,31 @@
             
             button.style.display = 'none';
             
-            // Показываем всплывающее окно только с изображением 9
+            // Проверяем правильность ответа и подсвечиваем варианты
+            const options = document.querySelectorAll('.test-option');
+            options.forEach(option => {
+                if (option.textContent === 'Сверху справа на картинке') {
+                    option.classList.add('correct');
+                } else if (option === selectedOption && option.textContent !== 'Сверху справа на картинке') {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            const isCorrect = selectedOption.textContent === 'Сверху справа на картинке';
+            const hintText = isCorrect 
+                ? '<span class="icon">✅</span> Верно. Действительно, изменения находятся справа сверху на картинке'
+                : '<span class="icon">❌</span> Неверно. Изменения находятся справа сверху на картинке';
+            
+            // Устанавливаем текст подсказки и класс в зависимости от правильности
+            const testHint = document.getElementById('testHint');
+            testHint.innerHTML = hintText;
+            testHint.className = isCorrect ? 'popup-hint correct' : 'popup-hint incorrect';
+            
+            // Показываем всплывающее окно с изображением 9 и подсказкой
             const testPopup = document.getElementById('testPopup');
             testPopup.classList.add('show');
             testPopup.dataset.nextContent = 'contentAfterTest';
+            testPopup.dataset.buttonId = 'testButton';
         }
 
         // Функция для показа текстового ответа во всплывающем окне
@@ -1064,13 +1135,18 @@
             const answerPopup = document.getElementById('answerPopup');
             answerPopup.classList.add('show');
             answerPopup.dataset.nextContent = 'contentAfterAnswer';
+            answerPopup.dataset.buttonId = 'answerButton';
         }
 
-        // Функция для показа следующего скрытого контента
+        // Функция для показа следующего скрытого контента с прокруткой
         function showNextContent(contentId) {
             const nextContent = document.getElementById(contentId);
             if (nextContent) {
                 nextContent.style.display = 'block';
+                // Плавная прокрутка к следующему контенту
+                setTimeout(() => {
+                    nextContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
             }
         }
 
@@ -1078,6 +1154,10 @@
         function continueToNext() {
             const hiddenContent = document.getElementById('hiddenContent');
             hiddenContent.style.display = 'block';
+            // Прокрутка к скрытому контенту
+            setTimeout(() => {
+                hiddenContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
         }
 
         // Закрытие всплывающих окон при клике
@@ -1085,8 +1165,24 @@
         popups.forEach(popup => {
             popup.addEventListener('click', function() {
                 this.classList.remove('show');
-                // После закрытия попапа показываем следующий контент
+                
+                // После закрытия попапа скрываем кнопку и показываем следующий контент
+                if (this.dataset.buttonId) {
+                    const button = document.getElementById(this.dataset.buttonId);
+                    if (button) {
+                        button.style.display = 'none';
+                    }
+                }
+                
                 if (this.dataset.nextContent) {
+                    // Если это тестовое всплывающее окно - скрываем весь тест
+                    if (this.id === 'testPopup') {
+                        const testContainer = document.getElementById('testContainer');
+                        if (testContainer) {
+                            testContainer.style.display = 'none';
+                        }
+                    }
+                    
                     showNextContent(this.dataset.nextContent);
                 }
             });
