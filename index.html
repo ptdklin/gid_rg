@@ -844,7 +844,7 @@
                         </div>
                         <div class="changes-label">Область с изменениями выделена <strong>красным цветом</strong></div>
                         <div class="image-pair">
-                            <div class="image-title">Изображение с выделенными изменениями</div>
+                            <div class="image-title">Область изменений на флюорографии пациента А</div>
                             <img src="image10.png" alt="Область изменений на флюорографии пациента А" id="highlightedImage">
                         </div>
                     </div>
@@ -910,7 +910,7 @@
                     <div class="test-result" id="testResult"></div>
                     
                     <!-- Фотография ответа теперь просто появляется в тексте -->
-                    <div class="result-image" id="resultImage">
+                    <div class="result-image" id="resultImage" style="display: none;">
                         <div class="image-container">
                             <div class="image-title">Область изменений на КТ пациента "Б"</div>
                             <img src="image9.png" alt="Область изменений на КТ пациента Б">
@@ -935,12 +935,6 @@
                     </div>
                     
                     <button class="test-button" id="answerButton" onclick="showAnswer(this)">Узнать ответ</button>
-
-                    <!-- Image12 появляется здесь после теста -->
-                    <div class="image-container" id="image12Container" style="display: none;">
-                        <div class="image-title">Изменения на КТ (image12)</div>
-                        <img src="image12.png" alt="Изменения на КТ">
-                    </div>
                 </div>
             </div>
 
@@ -1016,7 +1010,6 @@
             const resultDiv = document.getElementById('testResult');
             const resultImage = document.getElementById('resultImage');
             const testOptions = document.getElementById('testOptions');
-            const image12Container = document.getElementById('image12Container');
             
             if (!selectedOption) {
                 alert('Пожалуйста, выберите вариант ответа');
@@ -1035,10 +1028,7 @@
             }
             
             resultDiv.style.display = 'block';
-            resultImage.classList.add('show');
-            
-            // ПОСЛЕ ТЕСТА: показываем image12 в тексте (не во всплывающем окне)
-            image12Container.style.display = 'block';
+            resultImage.style.display = 'block';
             
             // Скрываем варианты ответов после проверки
             testOptions.style.display = 'none';
