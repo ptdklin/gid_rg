@@ -450,6 +450,8 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+            padding: 20px;
         }
 
         .popup-image.show {
@@ -459,9 +461,20 @@
 
         .popup-image img {
             max-width: 90%;
-            max-height: 90%;
+            max-height: 70%;
             border-radius: 8px;
             box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+
+        .popup-hint {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 90%;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.5;
         }
 
         .key-message {
@@ -840,38 +853,22 @@
                 <img src="image8.png" alt="Флюорография пациента А" id="patientAImage">
                 <div class="click-hint">Попробуйте найти изменения самостоятельно</div>
                 
-                <div class="check-image" id="checkImage">
-                    <div class="images-side-by-side" id="imagePair">
-                        <div class="image-pair">
-                            <div class="image-title">Исходное изображение</div>
-                            <img src="image8.png" alt="Флюорография пациента А" id="originalImage">
-                        </div>
-                        <div class="changes-label">Область с изменениями выделена <strong>красным цветом</strong></div>
-                        <div class="image-pair">
-                            <div class="image-title">Область изменений на флюорографии пациента А</div>
-                            <img src="image10.png" alt="Область изменений на флюорографии пациента А" id="highlightedImage">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hint-box" id="hintBox">
-                    <strong>Подсказка:</strong> Обратите внимание, как справа на изображении хорошо видны границы ключицы и рёбер, а слева на изображении граница рёбер и ключицы выглядит не так четко. Границы размыты, потому что под ними в легочной ткани видны изменения.
-                </div>
-                
-                <button class="check-button" id="checkButton1" onclick="showAnswerAndImage(this)">Узнать ответ</button>
-                
-                <div id="afterAnswerText" style="display: none; margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
-                    <p>Вы убедились, что обнаружить изменения на рентгеновских или фотографических снимках крайне сложно.</p>
-                    <p>Теперь давайте рассмотрим, как эти изменения легко визуализируются на компьютерной томографии.</p>
-                </div>
+                <button class="check-button" id="checkButton1" onclick="showAnswerAndImage()">Узнать ответ</button>
             </div>
 
             <!-- Скрытый контент после первой кнопки -->
             <div class="hidden-content" id="contentAfterFirstButton">
+                <div class="image-container">
+                    <img src="image10.png" alt="Область изменений на флюорографии пациента А" id="highlightedImage" class="enlarged-image">
+                    <div class="hint-box show">
+                        <strong>Подсказка:</strong> Обратите внимание, как справа на изображении хорошо видны границы ключицы и рёбер, а слева на изображении граница рёбер и ключицы выглядит не так четко. Границы размыты, потому что под ними в легочной ткани видны изменения.
+                    </div>
+                </div>
+
                 <div class="image-container" id="ct3dContainer">
                     <div class="image-title">3D КТ-сканирование того же пациента "А".</div>
                     <img src="image2.png" alt="КТ пациента А — 3D изображение">
-                    <button class="show-changes-button" onclick="showPopupImageAndNext('image13.png', 'contentAfterSecondButton')">Показать изменения</button>
+                    <button class="show-changes-button" onclick="showPopupImage('image13.png', 'contentAfterSecondButton')">Показать изменения</button>
                 </div>
 
                 <!-- Скрытый контент после второй кнопки -->
@@ -879,7 +876,7 @@
                     <div class="image-container" id="ct2dContainer">
                         <div class="image-title">Теперь посмотрите на 2D КТ-сканирование того же пациента "А".</div>
                         <img src="image3.png" alt="КТ пациента А — 2D изображение">
-                        <button class="show-changes-button" onclick="showPopupImageAndNext('image12.png', 'contentAfterThirdButton')">Показать изменения</button>
+                        <button class="show-changes-button" onclick="showPopupImage('image12.png', 'contentAfterThirdButton')">Показать изменения</button>
                     </div>
                     
                     <!-- Скрытый контент после третьей кнопки -->
@@ -919,16 +916,6 @@
                 <!-- Интерактивный тест -->
                 <div class="test-container">
                     <div class="test-question">Попробуйте найти "пятно" на КТ-изображении самостоятельно. Выберите вариант ответа</div>
-                    
-                    <div class="test-result" id="testResult"></div>
-                    
-                    <!-- Фотография ответа теперь просто появляется в тексте -->
-                    <div class="result-image" id="resultImage" style="display: none;">
-                        <div class="image-container">
-                            <div class="image-title">Область изменений на КТ пациента "Б"</div>
-                            <img src="image9.png" alt="Область изменений на КТ пациента Б">
-                        </div>
-                    </div>
 
                     <div class="test-options" id="testOptions">
                         <div class="test-option" onclick="selectOption(this)">Сверху справа на картинке</div>
@@ -937,7 +924,7 @@
                         <div class="test-option" onclick="selectOption(this)">Снизу слева на картинке</div>
                     </div>
                     
-                    <button class="test-button" id="testButton" onclick="checkAnswerAndShowNext(this, 'contentAfterTest')">Узнать ответ</button>
+                    <button class="test-button" id="testButton" onclick="checkAnswerAndShowPopup()">Узнать ответ</button>
 
                     <!-- Скрытый контент после теста -->
                     <div class="hidden-content" id="contentAfterTest">
@@ -945,11 +932,7 @@
                             Зачем пациенту сделали КТ, если неделю назад у него была "чистая" плановая флюорография?
                         </div>
                         
-                        <div class="answer-box" id="answerBox">
-                            На производстве выявлен случай туберкулеза. Всем сотрудникам поставлена кожная проба Диаскинтест. У данного пациента кожная проба оказалась положительной. При этом плановая профилактическая флюорография, сделанная неделю назад, патологии не показала. Для уточнения диагноза была назначена КТ, которая выявила небольшой очаг, невидимый при стандартном рентгеновском исследовании.
-                        </div>
-                        
-                        <button class="test-button" id="answerButton" onclick="showAnswerAndNext(this, 'contentAfterAnswer')">Узнать ответ</button>
+                        <button class="test-button" id="answerButton" onclick="showAnswerPopup()">Узнать ответ</button>
 
                         <!-- Скрытый контент после ответа -->
                         <div class="hidden-content" id="contentAfterAnswer">
@@ -1008,9 +991,27 @@
         </div>
     </div>
 
-    <!-- Всплывающее окно для изображений -->
+    <!-- Всплывающие окна -->
     <div class="popup-image" id="popupImage">
         <img id="popupImg" src="" alt="Изменения">
+    </div>
+
+    <div class="popup-image" id="testPopup">
+        <div class="popup-hint">
+            <div class="test-options">
+                <div class="test-option">Сверху справа на картинке</div>
+                <div class="test-option">Сверху слева на картинке</div>
+                <div class="test-option">Снизу справа на картинке</div>
+                <div class="test-option">Снизу слева на картинке</div>
+            </div>
+        </div>
+        <img src="image9.png" alt="Область изменений на КТ пациента Б">
+    </div>
+
+    <div class="popup-image" id="answerPopup">
+        <div class="popup-hint">
+            На производстве выявлен случай туберкулеза. Всем сотрудникам поставлена кожная проба Диаскинтест. У данного пациента кожная проба оказалась положительной. При этом плановая профилактическая флюорография, сделанная неделю назад, патологии не показала. Для уточнения диагноза была назначена КТ, которая выявила небольшой очаг, невидимый при стандартном рентгеновском исследовании.
+        </div>
     </div>
 
     <script>
@@ -1023,97 +1024,54 @@
             option.classList.add('selected');
         }
 
-        // Функция проверки ответа в тесте и показа следующего контента
-        function checkAnswerAndShowNext(button, nextContentId) {
-            const selectedOption = document.querySelector('.test-option.selected');
-            const resultDiv = document.getElementById('testResult');
-            const resultImage = document.getElementById('resultImage');
-            const testOptions = document.getElementById('testOptions');
-            
-            if (!selectedOption) {
-                alert('Пожалуйста, выберите вариант ответа');
-                return;
-            }
-            
-            const answer = selectedOption.textContent.trim();
-            const correctAnswer = 'Сверху справа на картинке';
-            
-            if (answer === correctAnswer) {
-                resultDiv.className = 'test-result correct';
-                resultDiv.innerHTML = '✅ <strong>Правильно!</strong> Изменения действительно находятся сверху справа на картинке.';
-            } else {
-                resultDiv.className = 'test-result incorrect';
-                resultDiv.innerHTML = '❌ <strong>Неверно.</strong>';
-            }
-            
-            resultDiv.style.display = 'block';
-            resultImage.style.display = 'block';
-            
-            // Скрываем варианты ответов после проверки
-            testOptions.style.display = 'none';
-            
-            // Скрываем кнопку после нажатия
-            button.style.display = 'none';
-            
-            // Показываем следующий контент
-            showNextContent(nextContentId);
-        }
-
-        // Функция для показа ответа и следующего контента
-        function showAnswerAndNext(button, nextContentId) {
-            const answerBox = document.getElementById('answerBox');
-            answerBox.classList.add('show');
-            button.style.display = 'none';
-            
-            // Показываем следующий контент
-            showNextContent(nextContentId);
-        }
-
-        // Функция для показа подсказки и изображения
-        function showAnswerAndImage(button) {
-            const hintBox = document.getElementById('hintBox');
-            const checkImage = document.getElementById('checkImage');
-            const afterAnswerText = document.getElementById('afterAnswerText');
-            const patientAImage = document.getElementById('patientAImage');
-            const imagePair = document.getElementById('imagePair');
-            const originalImage = document.getElementById('originalImage');
-            const highlightedImage = document.getElementById('highlightedImage');
-            
-            checkImage.classList.add('show');
-            hintBox.classList.add('show');
-            afterAnswerText.style.display = 'block';
-            
-            // Увеличиваем и сближаем изображения
-            patientAImage.style.display = 'none';
-            imagePair.style.display = 'flex';
-            originalImage.classList.add('enlarged-image');
-            highlightedImage.classList.add('enlarged-image');
-            
-            // Скрываем кнопку после нажатия
+        // Функция для показа ответа и изображения
+        function showAnswerAndImage() {
+            const button = document.getElementById('checkButton1');
             button.style.display = 'none';
             
             // Показываем следующий контент
             showNextContent('contentAfterFirstButton');
-            
-            // Прокручиваем к увеличенным изображениям
-            imagePair.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
-        // Функция для показа всплывающего изображения и следующего контента
-        function showPopupImageAndNext(imageSrc, nextContentId) {
+        // Функция для показа всплывающего изображения
+        function showPopupImage(imageSrc, nextContentId) {
             const popup = document.getElementById('popupImage');
             const popupImg = document.getElementById('popupImg');
             
             popupImg.src = imageSrc;
             popup.classList.add('show');
             
-            // Автоматически закрываем через 2 секунды
-            setTimeout(function() {
-                popup.classList.remove('show');
-                
-                // Показываем следующий контент после закрытия попапа
-                showNextContent(nextContentId);
-            }, 2000);
+            // Сохраняем ID следующего контента для показа после закрытия
+            popup.dataset.nextContent = nextContentId;
+        }
+
+        // Функция проверки ответа в тесте и показа всплывающего окна
+        function checkAnswerAndShowPopup() {
+            const selectedOption = document.querySelector('.test-option.selected');
+            const button = document.getElementById('testButton');
+            
+            if (!selectedOption) {
+                alert('Пожалуйста, выберите вариант ответа');
+                return;
+            }
+            
+            button.style.display = 'none';
+            
+            // Показываем всплывающее окно с тестом и изображением 9
+            const testPopup = document.getElementById('testPopup');
+            testPopup.classList.add('show');
+            testPopup.dataset.nextContent = 'contentAfterTest';
+        }
+
+        // Функция для показа ответа во всплывающем окне
+        function showAnswerPopup() {
+            const button = document.getElementById('answerButton');
+            button.style.display = 'none';
+            
+            // Показываем всплывающее окно с ответом
+            const answerPopup = document.getElementById('answerPopup');
+            answerPopup.classList.add('show');
+            answerPopup.dataset.nextContent = 'contentAfterAnswer';
         }
 
         // Функция для показа следующего скрытого контента
@@ -1121,7 +1079,6 @@
             const nextContent = document.getElementById(contentId);
             if (nextContent) {
                 nextContent.style.display = 'block';
-                nextContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
@@ -1129,16 +1086,19 @@
         function continueToNext() {
             const hiddenContent = document.getElementById('hiddenContent');
             hiddenContent.style.display = 'block';
-            hiddenContent.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Закрытие всплывающего окна при клике
-        const popup = document.getElementById('popupImage');
-        if (popup) {
+        // Закрытие всплывающих окон при клике
+        const popups = document.querySelectorAll('.popup-image');
+        popups.forEach(popup => {
             popup.addEventListener('click', function() {
                 this.classList.remove('show');
+                // После закрытия попапа показываем следующий контент
+                if (this.dataset.nextContent) {
+                    showNextContent(this.dataset.nextContent);
+                }
             });
-        }
+        });
     </script>
 </body>
 </html>
