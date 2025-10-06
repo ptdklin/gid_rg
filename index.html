@@ -306,7 +306,7 @@
             transition: background 0.3s ease;
             display: block;
             margin: 0 auto;
-            animation: intenseBlink 1.5s infinite;
+            animation: intenseBlink 1.5s infinite, shake 0.8s infinite;
         }
 
         .test-button:hover {
@@ -375,7 +375,7 @@
             display: block;
             margin: 20px auto;
             box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-            animation: intenseBlink 1.5s infinite;
+            animation: intenseBlink 1.5s infinite, shake 0.8s infinite;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -429,7 +429,7 @@
             display: block;
             margin: 20px auto;
             box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
-            animation: intenseBlink 1.5s infinite;
+            animation: intenseBlink 1.5s infinite, shake 0.8s infinite;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -547,7 +547,7 @@
             display: inline-block;
             margin: 20px 10px;
             box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
-            animation: intenseBlink 1.5s infinite;
+            animation: intenseBlink 1.5s infinite, shake 0.8s infinite;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -589,6 +589,12 @@
         @keyframes intenseBlink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.3; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+            20%, 40%, 60%, 80% { transform: translateX(3px); }
         }
 
         @keyframes expandHint {
@@ -827,7 +833,6 @@
             <div class="case-title">Пациент "А" — своевременное выявление</div>
             
             <div class="image-container">
-                <!-- УДАЛЕНО: "Пациент 'А'." -->
                 <img src="image8.png" alt="Флюорография пациента А" id="patientAImage">
                 <div class="click-hint">Попробуйте найти изменения самостоятельно</div>
                 
@@ -930,6 +935,12 @@
                     </div>
                     
                     <button class="test-button" id="answerButton" onclick="showAnswer(this)">Узнать ответ</button>
+
+                    <!-- Image12 появляется здесь после теста -->
+                    <div class="image-container" id="image12Container" style="display: none;">
+                        <div class="image-title">Изменения на КТ (image12)</div>
+                        <img src="image12.png" alt="Изменения на КТ">
+                    </div>
                 </div>
             </div>
 
@@ -992,11 +1003,10 @@
     <script>
         // Функция для выбора варианта в тесте
         function selectOption(option) {
-            // Снимаем выделение со всех вариантов
             const options = option.parentElement.querySelectorAll('.test-option');
-            options.forEach(opt => opt.classList.remove('selected'));
-            
-            // Выделяем выбранный вариант
+            for (let i = 0; i < options.length; i++) {
+                options[i].classList.remove('selected');
+            }
             option.classList.add('selected');
         }
 
@@ -1006,6 +1016,7 @@
             const resultDiv = document.getElementById('testResult');
             const resultImage = document.getElementById('resultImage');
             const testOptions = document.getElementById('testOptions');
+            const image12Container = document.getElementById('image12Container');
             
             if (!selectedOption) {
                 alert('Пожалуйста, выберите вариант ответа');
@@ -1026,6 +1037,9 @@
             resultDiv.style.display = 'block';
             resultImage.classList.add('show');
             
+            // ПОСЛЕ ТЕСТА: показываем image12 в тексте (не во всплывающем окне)
+            image12Container.style.display = 'block';
+            
             // Скрываем варианты ответов после проверки
             testOptions.style.display = 'none';
             
@@ -1037,8 +1051,6 @@
         function showAnswer(button) {
             const answerBox = document.getElementById('answerBox');
             answerBox.classList.add('show');
-            
-            // Скрываем кнопку после нажатия
             button.style.display = 'none';
         }
 
@@ -1078,21 +1090,25 @@
             popup.classList.add('show');
             
             // Автоматически закрываем через 2 секунды
-            setTimeout(() => {
+            setTimeout(function() {
                 popup.classList.remove('show');
             }, 2000);
         }
 
         // Функция для продолжения к следующему разделу
         function continueToNext() {
-            document.getElementById('hiddenContent').style.display = 'block';
-            document.getElementById('hiddenContent').scrollIntoView({ behavior: 'smooth' });
+            const hiddenContent = document.getElementById('hiddenContent');
+            hiddenContent.style.display = 'block';
+            hiddenContent.scrollIntoView({ behavior: 'smooth' });
         }
 
         // Закрытие всплывающего окна при клике
-        document.getElementById('popupImage').addEventListener('click', function() {
-            this.classList.remove('show');
-        });
+        const popup = document.getElementById('popupImage');
+        if (popup) {
+            popup.addEventListener('click', function() {
+                this.classList.remove('show');
+            });
+        }
     </script>
 </body>
 </html>
