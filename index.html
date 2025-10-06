@@ -612,6 +612,7 @@
         .button-container {
             text-align: center;
             margin: 30px 0;
+            display: none;
         }
 
         .blinking-text {
@@ -983,7 +984,7 @@
                             <p>Поэтому мы находим проблему даже на ранней стадии.</p>
                         </div>
                         
-                        <div class="button-container">
+                        <div class="button-container" id="continueButtons">
                             <p style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">Вам понятно? Вы хотите продолжить?</p>
                             <button class="no-button">Нет</button>
                             <button class="continue-button" onclick="continueToNext()">Да</button>
@@ -1218,6 +1219,18 @@
             }
         }
 
+        // Функция для показа кнопок "Нет" и "Да" через 5 секунд
+        function showContinueButtons() {
+            const buttonContainer = document.getElementById('continueButtons');
+            if (buttonContainer) {
+                buttonContainer.style.display = 'block';
+                // Плавная прокрутка к кнопкам
+                setTimeout(() => {
+                    buttonContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+
         // Функция для продолжения к следующему разделу
         function continueToNext() {
             const hiddenContent = document.getElementById('hiddenContent');
@@ -1251,7 +1264,16 @@
                         }
                     }
                     
-                    showNextContent(this.dataset.nextContent);
+                    // Особый случай: для image12 показываем кнопки только через 5 секунд
+                    if (this.id === 'popupImage' && document.getElementById('popupImg').src.includes('image12')) {
+                        // Показываем следующий контент (conclusion-box) сразу
+                        showNextContent(this.dataset.nextContent);
+                        // Устанавливаем таймер на 5 секунд для показа кнопок
+                        setTimeout(showContinueButtons, 5000);
+                    } else {
+                        // Для всех остальных случаев - стандартное поведение
+                        showNextContent(this.dataset.nextContent);
+                    }
                 }
             });
         });
