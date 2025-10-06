@@ -616,19 +616,56 @@
 
         .blinking-text {
             animation: intenseBlink 1.5s infinite;
-            font-size: 24px;
+            font-size: 60px;
             font-weight: 700;
             color: #ff6b6b;
             text-align: center;
             margin: 30px 0;
-            padding: 20px;
+            padding: 40px 20px;
             background: #fff3cd;
-            border-radius: 10px;
+            border-radius: 15px;
             border: 3px solid #ff6b6b;
+            line-height: 1.3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
         }
 
         .hidden-content {
             display: none;
+        }
+
+        /* Кнопка закрытия для всплывающих окон */
+        .close-hint-button {
+            background: linear-gradient(135deg, #2c5aa0, #1e3a8a);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 20px;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .close-hint-button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #1e3a8a, #2c5aa0);
+        }
+
+        /* Стиль для автора */
+        .author-info {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 16px;
+            color: #666;
+            border-top: 2px solid #e0e0e0;
+            font-style: italic;
         }
 
         @keyframes intenseBlink {
@@ -708,8 +745,9 @@
             }
             
             .blinking-text {
-                font-size: 20px;
-                padding: 15px;
+                font-size: 32px;
+                padding: 25px 15px;
+                min-height: 150px;
             }
             
             .images-side-by-side {
@@ -720,6 +758,16 @@
             .changes-label {
                 font-size: 18px;
                 padding: 10px;
+            }
+            
+            .close-hint-button {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+            
+            .author-info {
+                font-size: 14px;
+                padding: 15px;
             }
         }
 
@@ -755,8 +803,9 @@
             }
             
             .blinking-text {
-                font-size: 18px;
-                padding: 12px;
+                font-size: 24px;
+                padding: 20px 12px;
+                min-height: 120px;
             }
             
             .changes-label {
@@ -772,6 +821,16 @@
                 display: block;
                 margin: 10px auto;
                 width: 80%;
+            }
+            
+            .close-hint-button {
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+            
+            .author-info {
+                font-size: 13px;
+                padding: 12px;
             }
         }
     </style>
@@ -942,8 +1001,8 @@
                 
                 <div class="comparison-grid">
                     <div class="image-container">
-                        <div class="image-title">Пациент "Б". Флюорография оказалась без видимых изменений.</div>
-                        <img src="image5.png" alt="Флюорография пациента Б — без видимых изменений">
+                        <div class="image-title">Пациент "Б". Флюорография.</div>
+                        <img src="image5.png" alt="Флюорография пациента Б">
                     </div>
                     <div class="image-container">
                         <div class="image-title">Но на КТ у пациента "Б" обнаружили изменения в легких.</div>
@@ -1029,9 +1088,15 @@
         </div>
     </div>
 
+    <!-- Информация об авторе -->
+    <div class="author-info">
+        Автор и разработчик — заведующий филиалом Клинский ГБУЗ МО МОКПТД Лукаш Игорь Александрович.
+    </div>
+
     <!-- Всплывающие окна -->
     <div class="popup-image" id="popupImage">
         <img id="popupImg" src="" alt="Изменения">
+        <button class="close-hint-button">Закрыть окно</button>
     </div>
 
     <div class="popup-image" id="image10Popup">
@@ -1039,6 +1104,7 @@
         <div class="popup-hint">
             <strong>Подсказка:</strong> Обратите внимание, как справа на изображении хорошо видны границы ключицы и рёбер, а слева на изображении граница рёбер и ключицы выглядит не так четко. Границы размыты, потому что под ними в легочной ткани видны изменения.
         </div>
+        <button class="close-hint-button">Закрыть окно</button>
     </div>
 
     <div class="popup-image" id="testPopup">
@@ -1046,12 +1112,14 @@
         <div class="popup-hint" id="testHint">
             <!-- Текст подсказки будет заполнен динамически -->
         </div>
+        <button class="close-hint-button">Закрыть окно</button>
     </div>
 
     <div class="popup-image" id="answerPopup">
         <div class="popup-hint">
             На производстве выявлен случай туберкулеза. Всем сотрудникам поставлена кожная проба Диаскинтест. У данного пациента кожная проба оказалась положительной. При этом плановая профилактическая флюорография, сделанная неделю назад, патологии не показала. Для уточнения диагноза была назначена КТ, которая выявила небольшой очаг, невидимый при стандартном рентгеновском исследовании.
         </div>
+        <button class="close-hint-button">Закрыть окно</button>
     </div>
 
     <script>
