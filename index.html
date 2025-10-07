@@ -964,8 +964,8 @@
             <!-- Скрытый контент после первой кнопки -->
             <div class="hidden-content" id="contentAfterFirstButton">
                 <div class="image-container" id="ct3dContainer">
-                    <div class="image-title">3D КТ-сканирование того же пациента "А".</div>
-                    <img src="image2.png" alt="КТ пациента А — 3D изображение">
+                    <div class="image-title">Заглянем под ребра. Компьютерная томография позволяет увидеть больше</div>
+                    <img src="image2.png" alt="">
                     <button class="action-button" id="buttonImage2" onclick="showPopupImage('image13.png', 'contentAfterSecondButton', 'buttonImage2')">Нажать сюда и посмотреть ответ</button>
                 </div>
 
@@ -973,7 +973,7 @@
                 <div class="hidden-content" id="contentAfterSecondButton">
                     <div class="image-container" id="ct2dContainer">
                         <div class="image-title">Теперь посмотрите на 2D КТ-сканирование того же пациента "А".</div>
-                        <img src="image3.png" alt="КТ пациента А — 2D изображение">
+                        <img src="image3.png" alt="Так выглядит 3D КТ-изображение">
                         <button class="action-button" id="buttonImage3" onclick="showPopupImage('image12.png', 'contentAfterThirdButton', 'buttonImage3')">Нажать сюда и посмотреть ответ</button>
                     </div>
                     
@@ -1002,11 +1002,11 @@
                 
                 <div class="comparison-grid">
                     <div class="image-container">
-                        <div class="image-title">Пациент "Б". Флюорография.</div>
+                        <div class="image-title">По данным флюорографии изменений не видно.</div>
                         <img src="image5.png" alt="Флюорография пациента Б">
                     </div>
                     <div class="image-container">
-                        <div class="image-title">Но на КТ у пациента "Б" обнаружили изменения в легких.</div>
+                        <div class="image-title">Но по данным КТ обнаружены изменения в легких.</div>
                         <img src="image4.png" alt="КТ пациента Б — начальные изменения">
                     </div>
                 </div>
@@ -1036,11 +1036,11 @@
                     <!-- Скрытый контент после ответа -->
                     <div class="hidden-content" id="contentAfterAnswer">
                         <div class="case-study">
-                            <div class="case-title">Пациент "В" — запущенный случай</div>
+                            <div class="case-title">Пациент "В" — запущенный случай туберкулёза</div>
                             <p>Позднее выявление, разрушенные лёгкие. Прогноз неблагоприятный.</p>
                             
                             <div class="image-container">
-                                <div class="image-title">Пациент "В". Запущенный случай туберкулёза.</div>
+                                <div class="image-title"></div>
                                 <img src="image6.png" alt="Запущенный случай туберкулёза">
                             </div>
                         </div>
@@ -1104,7 +1104,7 @@
     <div class="popup-image" id="image10Popup">
         <img src="image10.png" alt="Область изменений на флюорографии пациента А">
         <div class="popup-hint">
-            <strong>Подсказка:</strong> Обратите внимание, как справа на изображении хорошо видны границы ключицы и рёбер, а слева на изображении граница рёбер и ключицы выглядит не так четко. Границы размыты, потому что под ними в легочной ткани видны изменения.
+            <strong>Подсказка:</strong> Изменения в легких скрыты от глаз за пересечением ключицы и ребра  в левой части рисунка. Обратите внимание, что справа на изображении хорошо видны границы ключицы и рёбер, а слева на изображении границы размыты.Согласитесь, не каждый заметит!
         </div>
         <button class="close-hint-button">Закрыть окно</button>
     </div>
